@@ -1,5 +1,5 @@
 import { useAnimation } from 'framer-motion'
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 export default function useScrollAnimation<T extends HTMLElement> () {
   const controls = useAnimation()

@@ -1,7 +1,8 @@
 'use client'
 
-import useScrollAnimation from '@/app/hooks/useScrollAnimation'
 import { motion, type HTMLMotionProps } from 'framer-motion'
+
+import useScrollAnimation from '@/app/hooks/useScrollAnimation'
 
 type FadeInContainerProps = HTMLMotionProps<'section'>
 
