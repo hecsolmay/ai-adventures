@@ -1,7 +1,7 @@
 'use client'
 
 import {
-  Link,
+  Link as NextUILink,
   NavbarBrand,
   NavbarContent,
   NavbarItem,
@@ -12,22 +12,16 @@ import {
 } from '@nextui-org/react'
 import { Bot } from 'lucide-react'
 import { useState } from 'react'
+import { usePathname } from 'next/navigation'
+import Link from 'next/link'
+
+import { navbarLinks } from '@/constants'
 
 export default function Navbar () {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const pathname = usePathname()
 
-  const menuItems = [
-    'Profile',
-    'Dashboard',
-    'Activity',
-    'Analytics',
-    'System',
-    'Deployments',
-    'My Settings',
-    'Team Settings',
-    'Help & Feedback',
-    'Log Out'
-  ]
+  const getIsActive = (href: string) => pathname === href
 
   return (
     <NavbarNextUI onMenuOpenChange={setIsMenuOpen}>
@@ -36,53 +30,51 @@ export default function Navbar () {
           aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
           className='sm:hidden'
         />
-        <NavbarBrand>
-          <Bot className='size-7 pr-2' />
-          <p className='font-bold text-inherit'>AI ADVENTURES</p>
-        </NavbarBrand>
+        <Link href='/'>
+          <NavbarBrand>
+            <Bot className='size-7 pr-2' />
+            <p className='font-bold text-inherit'>AI ADVENTURES</p>
+          </NavbarBrand>
+        </Link>
       </NavbarContent>
 
       <NavbarContent className='hidden gap-4 sm:flex' justify='center'>
-        <NavbarItem>
-          <Link color='foreground' href='#'>
-            Features
-          </Link>
-        </NavbarItem>
-        <NavbarItem isActive>
-          <Link href='#' aria-current='page'>
-            Customers
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link color='foreground' href='#'>
-            Integrations
-          </Link>
-        </NavbarItem>
+        {navbarLinks.map(({ name, href }) => {
+          const isActive = getIsActive(href)
+
+          return (
+            <NavbarItem key={href} isActive={isActive}>
+              <NextUILink
+                color={isActive ? 'primary' : 'foreground'}
+                href={href}
+              >
+                {name}
+              </NextUILink>
+            </NavbarItem>
+          )
+        })}
       </NavbarContent>
       <NavbarContent justify='end'>
         <NavbarItem>
-          <Link href='#'>Iniciar Sesión</Link>
+          <NextUILink href='#'>Iniciar Sesión</NextUILink>
         </NavbarItem>
       </NavbarContent>
-      <NavbarMenu>
-        {menuItems.map((item, index) => (
-          <NavbarMenuItem key={`${item}-${index}`}>
-            <Link
-              color={
-                index === 2
-                  ? 'primary'
-                  : index === menuItems.length - 1
-                    ? 'danger'
-                    : 'foreground'
-              }
-              className='w-full'
-              href='#'
-              size='lg'
-            >
-              {item}
-            </Link>
-          </NavbarMenuItem>
-        ))}
+      <NavbarMenu className='bg-white/80 backdrop-blur-sm'>
+        {navbarLinks.map(({ name, href }) => {
+          const isActive = getIsActive(href)
+          return (
+            <NavbarMenuItem key={href} isActive={isActive}>
+              <NextUILink
+                color={isActive ? 'primary' : 'foreground'}
+                className='w-full'
+                href={href}
+                size='lg'
+              >
+                {name}
+              </NextUILink>
+            </NavbarMenuItem>
+          )
+        })}
       </NavbarMenu>
     </NavbarNextUI>
   )
