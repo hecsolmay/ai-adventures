@@ -1,20 +1,21 @@
 'use client'
 
 import {
-  Link as NextUILink,
   NavbarBrand,
   NavbarContent,
   NavbarItem,
   NavbarMenu,
   NavbarMenuItem,
   NavbarMenuToggle,
-  Navbar as NavbarNextUI
+  Navbar as NavbarNextUI,
+  Link as NextUILink
 } from '@nextui-org/react'
-import { Bot } from 'lucide-react'
-import { useState } from 'react'
-import { usePathname } from 'next/navigation'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { useState } from 'react'
 
+import BrandLogo from '@/components/icons/brand-logo'
+import BrandText from '@/components/icons/brand-text'
 import { navbarLinks } from '@/constants'
 
 export default function Navbar () {
@@ -32,8 +33,8 @@ export default function Navbar () {
         />
         <Link href='/'>
           <NavbarBrand>
-            <Bot className='size-7 pr-2' />
-            <p className='font-bold text-inherit'>AI ADVENTURES</p>
+            <BrandLogo className='size-8 pt-1' />
+            <BrandText className='' />
           </NavbarBrand>
         </Link>
       </NavbarContent>
