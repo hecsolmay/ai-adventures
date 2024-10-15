@@ -1,7 +1,7 @@
 import { type CoreMessage } from 'ai'
 
 import { prompt } from '@/constants/ai'
-import { type BeginTale } from '@/schemas/tales'
+import { type ContinueTale, type BeginTale } from '@/schemas/tales'
 import { generate } from '@/utils/ai'
 
 export class TalesServices {
@@ -15,6 +15,27 @@ export class TalesServices {
     })
 
     const generatedResponse = await generate(messages, beginTale.apiKey)
+
+    messages.push({
+      role: 'assistant',
+      content: generatedResponse.message
+    })
+
+    return {
+      ...generatedResponse,
+      messages
+    }
+  }
+
+  static async continueTale (continueTale: ContinueTale) {
+    const messages: CoreMessage[] = continueTale.messages
+
+    messages.push({
+      role: 'user',
+      content: continueTale.choice
+    })
+
+    const generatedResponse = await generate(messages, continueTale.apiKey)
 
     messages.push({
       role: 'assistant',
