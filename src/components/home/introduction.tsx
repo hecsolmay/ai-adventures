@@ -3,31 +3,30 @@ import Image from 'next/image'
 
 export default function Introduction () {
   return (
-    <div className='container px-4 md:px-6'>
+    <div className='w-full max-w-7xl px-4 md:px-6'>
       <div className='grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]'>
-        <div className='flex flex-col justify-center space-y-4'>
-          <div className='space-y-2'>
+        <div className='flex flex-col justify-center gap-4'>
+          <div className='space-y-4'>
             <h2 className='text-3xl font-bold tracking-tighter sm:text-5xl'>
-              Learn Through Adventure
+              Potencia tu Imaginación
             </h2>
             <p className='max-w-[600px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed'>
-              Our educational platform combines storytelling with interactive
-              lessons, making learning fun and engaging for children of all
-              ages.
+              Nuestra plataforma educativa combina la narración con selecciones interactivas,
+              haciendo que el uso de la imaginación sea divertido y atractivo para niños de todas las edades.
             </p>
           </div>
           <ul className='mt-6 grid gap-6'>
             <li className='flex items-center space-x-2'>
               <BookOpen className='size-6 text-purple-600' />
-              <span>Personalized learning paths</span>
+              <span>Aprende de forma fácil</span>
             </li>
             <li className='flex items-center space-x-2'>
               <Zap className='size-6 text-purple-600' />
-              <span>Interactive AI-powered lessons</span>
+              <span>Historias creadas por IA</span>
             </li>
             <li className='flex items-center space-x-2'>
               <Sparkles className='size-6 text-purple-600' />
-              <span>Engaging storytelling experiences</span>
+              <span>Mejora la experiencia de la historia</span>
             </li>
           </ul>
         </div>

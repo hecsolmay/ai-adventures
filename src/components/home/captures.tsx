@@ -4,15 +4,14 @@ import Image from 'next/image'
 
 export default function Captures () {
   return (
-    <div className='container px-4 md:px-6'>
-      <div className='flex flex-col items-center space-y-4 text-center'>
+    <div className='w-full max-w-7xl px-4 md:px-6'>
+      <div className='flex flex-col items-center gap-4 text-center'>
         <div className='space-y-2'>
           <h2 className='text-3xl font-bold tracking-tighter sm:text-5xl'>
-            Capture the Magic
+            Captura la Magia
           </h2>
           <p className='mx-auto max-w-[600px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed'>
-            Create your own AI-powered stories and embark on incredible
-            adventures.
+            Crea tus propias historias potenciadas por IA y embarca en aventuras increíbles.
           </p>
         </div>
         <div className='w-full max-w-full space-y-4'>
@@ -47,7 +46,7 @@ export default function Captures () {
           </div>
         </div>
         <Button className='bg-purple-600 text-white hover:bg-purple-700'>
-          Create Your Story
+          Crea tu historia
           <ArrowRight className='ml-2 size-4' />
         </Button>
       </div>

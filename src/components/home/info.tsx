@@ -1,25 +1,24 @@
 export default function Info () {
   return (
-    <div className='container px-4 md:px-6'>
+    <div className='w-full max-w-7xl px-4 md:px-6'>
       <div className='flex flex-col items-center space-y-4 text-center'>
         <div className='space-y-2'>
           <h2 className='text-3xl font-bold tracking-tighter sm:text-5xl'>
-            Discover AI Adventures
+            Descubre AI Adventures
           </h2>
-          <p className='mx-auto max-w-[900px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed'>
-            AI Adventures is revolutionizing the way children learn and explore
-            their creativity. Our platform combines cutting-edge AI technology
-            with engaging storytelling to create a unique educational
-            experience. Through interactive narratives and personalized learning
-            paths, we inspire curiosity, foster imagination, and enhance
-            cognitive skills.
+          <p className='mx-auto max-w-[900px] pt-8 text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed'>
+            AI Adventures es una revolución en la forma en que los niños
+            aprenden y exploran su creatividad. Nuestra plataforma combina
+            tecnología de IA avanzada con una narrativa entretenida para crear
+            una experiencia educativa única. A través de narrativas interactivas inspiramos curiosidad,
+            fomentamos la imaginación y mejoramos las habilidades cognitivas.
           </p>
           <p className='mx-auto max-w-[900px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed'>
-            Our AI-powered system adapts to each child&apos;s learning style,
-            ensuring that every adventure is tailored to their individual needs
-            and interests. From magical quests to scientific explorations, AI
-            Adventures opens up a world of possibilities for young minds to grow
-            and thrive.
+            Nuestro sistema potenciado por AI adapta a cada niño y su forma de crear historias,
+            garantizando que cada aventura sea adaptada a sus
+            necesidades y intereses individuales. Desde aventuras mágicas hasta
+            exploraciones científicas, AI Adventures abre un mundo de
+            posibilidades para los niños jóvenes para crecer y sobrevivir.
           </p>
         </div>
       </div>
