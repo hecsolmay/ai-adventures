@@ -19,7 +19,7 @@ export const beginTaleSchema = z.object({
     }),
 
   // THIS IS A TEXT REFERENCE USED TO IMPROVE THE TALE WITH THE USER CHOICE
-  imageURLBackground: z.string().trim().optional(),
+  textReference: z.string().trim().optional(),
 
   // THIS IS THE OPENAI API KEY USED TO GENERATE THE AI IF THE USER PROVIDES IT
   apiKey: z.string().optional()
@@ -43,8 +43,8 @@ export const continueTaleSchema = z.object({
     .trim()
     .min(1, 'El texto de la opción elegida es requerido'),
 
-  // THIS IS A TEXT REFERENCE USED TO IMPROVE THE TALE WITH THE USER CHOICE
-  imageURLBackground: z.string().trim().optional(),
+  // THIS IS A IMAGE URL WHERE IS GOING TO BE THE REFERENCE IMAGE TO CREATE IMAGES RELATED TO THE TALE
+  imageURLReference: z.string().trim().optional(),
 
   // THIS IS THE OPENAI API KEY USED TO GENERATE THE AI IF THE USER PROVIDES IT
   apiKey: z.string().optional()
