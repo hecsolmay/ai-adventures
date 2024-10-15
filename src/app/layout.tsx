@@ -20,7 +20,8 @@ const geistMono = localFont({
 
 export const metadata: Metadata = {
   title: 'AI Adventures',
-  description: 'AI Adventures es una plataforma que busca fomentar la interacción entre los usuarios y los modelos de IA para generar contenido personalizado y creativo.'
+  description: 'AI Adventures es una plataforma que busca fomentar la interacción entre los usuarios y los modelos de IA para generar contenido personalizado y creativo.',
+  manifest: '/manifest.json'
 }
 
 export default function RootLayout ({
