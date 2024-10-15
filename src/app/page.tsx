@@ -7,7 +7,7 @@ import Introduction from '@/components/home/introduction'
 
 export default function LandingPage () {
   return (
-    <main className='flex-1'>
+    <main className='mx-auto max-w-7xl flex-1'>
       <FadeInContainer
         initial={{ opacity: 0, y: 50 }}
         transition={{ duration: 0.5 }}
@@ -17,28 +17,28 @@ export default function LandingPage () {
       </FadeInContainer>
       <FadeInContainer
         initial={{ opacity: 0, y: 50 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.8 }}
         className='w-full bg-gray-100 py-12 md:py-24 lg:py-32'
       >
         <Info />
       </FadeInContainer>
       <FadeInContainer
         initial={{ opacity: 0, y: 50 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.8 }}
         className='w-full py-12 md:py-24 lg:py-32'
       >
         <Captures />
       </FadeInContainer>
       <FadeInContainer
         initial={{ opacity: 0, y: 50 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.8 }}
         className='w-full bg-gray-100 py-12 md:py-24 lg:py-32'
       >
         <Introduction />
       </FadeInContainer>
       <FadeInContainer
         initial={{ opacity: 0, y: 50 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.8 }}
         className='w-full bg-purple-600 py-12 text-white md:py-24 lg:py-32'
       >
         <ComingSoon />
