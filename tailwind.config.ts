@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss'
+
 import { nextui } from '@nextui-org/react'
 
 const config: Config = {
@@ -13,6 +14,9 @@ const config: Config = {
       colors: {
         background: 'var(--background)',
         foreground: 'var(--foreground)'
+      },
+      maxWidth: {
+        '8xl': '90rem'
       }
     }
   },

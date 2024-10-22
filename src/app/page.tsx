@@ -7,7 +7,7 @@ import Introduction from '@/components/home/introduction'
 
 export default function LandingPage () {
   return (
-    <main className='mx-auto max-w-7xl flex-1'>
+    <main className='mx-auto max-w-8xl flex-1'>
       <FadeInContainer
         initial={{ opacity: 0, y: 50 }}
         transition={{ duration: 0.5 }}
