@@ -1,6 +1,7 @@
 import { Button } from '@nextui-org/react'
 import { ArrowRight } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
 
 export default function Captures () {
   return (
@@ -11,7 +12,8 @@ export default function Captures () {
             Captura la Magia
           </h2>
           <p className='mx-auto max-w-[600px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed'>
-            Crea tus propias historias potenciadas por IA y embarca en aventuras increíbles.
+            Crea tus propias historias potenciadas por IA y embarca en aventuras
+            increíbles.
           </p>
         </div>
         <div className='w-full max-w-full space-y-4'>
@@ -45,7 +47,11 @@ export default function Captures () {
             </div>
           </div>
         </div>
-        <Button className='bg-purple-600 text-white hover:bg-purple-700'>
+        <Button
+          as={Link}
+          href='/tools/tales'
+          className='bg-purple-600 text-white hover:bg-purple-700'
+        >
           Crea tu historia
           <ArrowRight className='ml-2 size-4' />
         </Button>

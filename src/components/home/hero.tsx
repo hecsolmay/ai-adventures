@@ -1,4 +1,5 @@
 import { Button } from '@nextui-org/react'
+import Link from 'next/link'
 
 export default function Hero () {
   return (
@@ -9,17 +10,23 @@ export default function Hero () {
             AI Adventures
           </h1>
           <p className='mx-auto max-w-[700px] text-white md:text-xl'>
-            Únete a un viaje de imaginación y aprendizaje con el
-            narrador de historias y educación basado en IA.
+            Únete a un viaje de imaginación y aprendizaje con el narrador de
+            historias y educación basado en IA.
           </p>
         </div>
         <div className='space-x-4'>
-          <Button className='bg-white text-purple-600 hover:bg-gray-100'>
+          <Button
+            as={Link}
+            href='/tools/tales'
+            className='bg-white text-purple-600 hover:bg-gray-100'
+          >
             Crear tu historia
           </Button>
           <Button
             variant='bordered'
             className='border-white bg-transparent text-white hover:bg-white hover:text-purple-600'
+            as={Link}
+            href='/learn'
           >
             Aprender más
           </Button>

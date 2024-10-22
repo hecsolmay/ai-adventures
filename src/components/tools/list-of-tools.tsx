@@ -1,4 +1,5 @@
-import { Card, CardBody, CardFooter, Button, Link } from '@nextui-org/react'
+import { Card, CardBody, CardFooter, Button } from '@nextui-org/react'
+import Link from 'next/link'
 
 import { TOOLS } from '@/constants/tools'
 import { type DivProps } from '@/types/props'

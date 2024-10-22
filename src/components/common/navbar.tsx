@@ -48,6 +48,7 @@ export default function Navbar () {
               <NextUILink
                 color={isActive ? 'primary' : 'foreground'}
                 href={href}
+                as={Link}
               >
                 {name}
               </NextUILink>
@@ -70,6 +71,7 @@ export default function Navbar () {
                 className='w-full'
                 href={href}
                 size='lg'
+                as={Link}
               >
                 {name}
               </NextUILink>
