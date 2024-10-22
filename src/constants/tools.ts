@@ -7,11 +7,13 @@ import {
   // ChartSpline
 } from 'lucide-react'
 
+import { type LucideIconType } from '@/types'
+
 interface Tool {
   slug: string
   title: string
   description: string
-  icon: typeof Bot
+  icon: LucideIconType
 }
 
 export const TOOLS: Tool[] = [

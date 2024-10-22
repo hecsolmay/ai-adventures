@@ -1,3 +1,5 @@
+import { type LucideIcon } from 'lucide-react'
+
 export interface FragmentType {
   message: string
   choices: string[]
@@ -5,3 +7,4 @@ export interface FragmentType {
 }
 
 export type Provider = 'openai' | 'groq'
+export type LucideIconType = LucideIcon
