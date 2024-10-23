@@ -32,7 +32,7 @@ export default function RootLayout ({
   return (
     <html lang='en'>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} scroll-smooth antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} overflow-x-hidden scroll-smooth antialiased`}
       >
         <Providers>
           <Navbar />
