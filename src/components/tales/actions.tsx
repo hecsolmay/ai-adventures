@@ -28,19 +28,28 @@ export function InfoStartButton () {
 }
 
 export function ReturnStepButton () {
-  const { goPrevStep, currentStep } = useStepsTales()
+  const { goPrevStep, currentStep, isLoadingFragment } = useStepsTales()
   const handleClick = () => {
+    if (currentStep === 0 || isLoadingFragment) return
     goPrevStep()
     scrollToTop()
   }
 
   if (currentStep === 0) return null
 
+  const isClickAvailable = currentStep > 0 && !isLoadingFragment
+
   return (
-    <Tooltip content='Regresar a la sección anterior' placement='bottom-end'>
+    <Tooltip
+      hidden={!isClickAvailable}
+      showArrow
+      content='Regresar a la sección anterior'
+      placement='bottom-start'
+    >
       <Button
         isIconOnly
-        className='absolute left-6 top-4 text-white'
+        disabled={!isClickAvailable}
+        className='absolute left-6 top-4 text-white disabled:opacity-70 disabled:hover:opacity-70'
         color='primary'
         onClick={handleClick}
       >
