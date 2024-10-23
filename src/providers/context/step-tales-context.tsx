@@ -5,8 +5,8 @@ import { type StepTalesContextType } from '@/types/context'
 const StepTalesContext = createContext<StepTalesContextType>({
   currentStep: 0,
   setCurrentStep: () => {},
-  category: '',
-  setCategory: () => {}
+  genre: null,
+  setGenre: () => {}
 })
 
 export function useStepTalesContext () {
@@ -15,15 +15,15 @@ export function useStepTalesContext () {
 
 export function StepTalesProvider ({ children }: { children: React.ReactNode }) {
   const [currentStep, setCurrentStep] = useState(0)
-  const [category, setCategory] = useState('')
+  const [genre, setGenre] = useState<string | null>(null)
 
   return (
     <StepTalesContext.Provider
       value={{
         currentStep,
         setCurrentStep,
-        category,
-        setCategory
+        genre,
+        setGenre
       }}
     >
       {children}

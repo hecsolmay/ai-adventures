@@ -1,6 +1,6 @@
 export interface StepTalesContextType {
   currentStep: number
   setCurrentStep: (step: number) => void
-  category: string
-  setCategory: (category: string) => void
+  genre: string | null
+  setGenre: (category: string | null) => void
 }
