@@ -1,7 +1,8 @@
 import { useStepTalesContext } from '@/providers/context/step-tales-context'
 
 export default function useStepsTales (maxSteps = 1) {
-  const { currentStep, setCurrentStep } = useStepTalesContext()
+  const { currentStep, setCurrentStep, category, setCategory } =
+    useStepTalesContext()
 
   const goNextStep = () => {
     if (currentStep === maxSteps) return
@@ -17,6 +18,7 @@ export default function useStepsTales (maxSteps = 1) {
 
   const reboot = () => {
     setCurrentStep(0)
+    setCategory('')
   }
 
   return {
@@ -26,6 +28,8 @@ export default function useStepsTales (maxSteps = 1) {
     goPrevStep,
     isNextStepAvailable: currentStep < maxSteps,
     isPrevStepAvailable: currentStep > 0,
-    reboot
+    reboot,
+    category,
+    setCategory
   }
 }
