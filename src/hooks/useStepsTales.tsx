@@ -2,7 +2,14 @@ import { MAX_STEPS } from '@/components/tales/step-transition'
 import { useStepTalesContext } from '@/providers/context/step-tales-context'
 
 export default function useStepsTales () {
-  const { currentStep, setCurrentStep, genre, setGenre } = useStepTalesContext()
+  const {
+    currentStep,
+    setCurrentStep,
+    genre,
+    setGenre,
+    isLoadingFragment,
+    setIsLoadingFragment
+  } = useStepTalesContext()
 
   const goNextStep = () => {
     if (currentStep === MAX_STEPS) return
@@ -19,6 +26,7 @@ export default function useStepsTales () {
   const reboot = () => {
     setCurrentStep(0)
     setGenre(null)
+    setIsLoadingFragment(false)
   }
 
   return {
@@ -30,6 +38,8 @@ export default function useStepsTales () {
     isPrevStepAvailable: currentStep > 0,
     reboot,
     genre,
-    setGenre
+    setGenre,
+    isLoadingFragment,
+    setIsLoadingFragment
   }
 }
