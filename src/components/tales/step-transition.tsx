@@ -9,10 +9,10 @@ import useStepsTales from '@/hooks/useStepsTales'
 
 const steps = [Introduction, SelectCategory, TalesCreation]
 
-const MAX_STEPS = steps.length - 1
+export const MAX_STEPS = steps.length - 1 // The last step is the final step
 
 export default function StepTalesTransition () {
-  const { currentStep } = useStepsTales(MAX_STEPS)
+  const { currentStep } = useStepsTales()
 
   const CurrentComponent = getCurrentStep(currentStep)
 
