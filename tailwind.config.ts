@@ -26,12 +26,14 @@ const config: Config = {
       themes: {
         light: {
           colors: {
-            primary: '#d5004f'
+            primary: '#d5004f',
+            secondary: '#b63c86'
           }
         },
         dark: {
           colors: {
-            primary: '#b63c86'
+            primary: '#d5004f',
+            secondary: '#b63c86'
           }
         }
       }
