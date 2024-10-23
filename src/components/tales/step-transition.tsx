@@ -7,7 +7,7 @@ import SelectCategory from '@/components/tales/select-category'
 import TalesCreation from '@/components/tales/tales-creation'
 import useStepsTales from '@/hooks/useStepsTales'
 
-const steps = [Introduction, TalesCreation, SelectCategory]
+const steps = [Introduction, SelectCategory, TalesCreation]
 
 const MAX_STEPS = steps.length - 1
 
