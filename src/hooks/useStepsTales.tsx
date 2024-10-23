@@ -5,7 +5,6 @@ export default function useStepsTales () {
   const { currentStep, setCurrentStep, genre, setGenre } = useStepTalesContext()
 
   const goNextStep = () => {
-    console.log({ currentStep, MAX_STEPS })
     if (currentStep === MAX_STEPS) return
     const newStep = currentStep + 1
     setCurrentStep(newStep)
