@@ -19,8 +19,21 @@ export default function useTalesFragments () {
 
   useEffect(() => {
     if (fragments.length <= 1) return
+
+    let scrollToHeight = 0
+
+    if (isLoadingFragment) {
+      const loaderFragment =
+        document.querySelector<HTMLDivElement>('.fragment-loader')
+      scrollToHeight = loaderFragment?.offsetTop ?? 0
+    } else {
+      const lastFragment = document.querySelector<HTMLDivElement>(
+        '.fragment-item:last-child'
+      )
+      scrollToHeight = lastFragment?.offsetTop ?? 0
+    }
     window.scrollTo({
-      top: document.body.scrollHeight,
+      top: scrollToHeight,
       behavior: 'smooth'
     })
   }, [fragments.length, isLoadingFragment])

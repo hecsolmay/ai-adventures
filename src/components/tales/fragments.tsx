@@ -35,7 +35,7 @@ export function StoryFragment ({
   const reorderedChoices = getSortedChoices()
 
   return (
-    <li className='mb-6 ms-6 lg:ms-12'>
+    <li className='fragment-item mb-6 ms-6 lg:ms-12'>
       <span className='absolute -start-3 flex size-6 items-center justify-center rounded-full bg-yellow-300 text-gray-500 ring-8 ring-gray-100 dark:bg-yellow-700 dark:ring-gray-900'>
         <Star size={24} />
       </span>

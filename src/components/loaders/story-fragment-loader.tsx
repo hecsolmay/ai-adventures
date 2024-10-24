@@ -9,7 +9,7 @@ export default function LoadingStoryFragment ({
   placeholder = 'Creando tu historia...'
 }: LoadingStoryFragmentProps) {
   return (
-    <div className='flex flex-col items-center justify-center'>
+    <div className='fragment-loader flex flex-col items-center justify-center'>
       <div className='rounded-full p-4 shadow-lg'>
         <motion.div
           animate={{
