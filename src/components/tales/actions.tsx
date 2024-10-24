@@ -7,6 +7,7 @@ import { motion } from 'framer-motion'
 import useStepsTales from '@/hooks/useStepsTales'
 import { cn } from '@/utils/cn'
 import { scrollToTop } from '@/utils/scroll'
+import useTalesFragments from '@/hooks/useTalesFragments'
 
 export function InfoStartButton () {
   const { goNextStep } = useStepsTales()
@@ -28,7 +29,8 @@ export function InfoStartButton () {
 }
 
 export function ReturnStepButton () {
-  const { goPrevStep, currentStep, isLoadingFragment } = useStepsTales()
+  const { isLoadingFragment } = useTalesFragments()
+  const { goPrevStep, currentStep } = useStepsTales()
   const handleClick = () => {
     if (currentStep === 0 || isLoadingFragment) return
     goPrevStep()
