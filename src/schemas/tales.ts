@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { type CoreMessage } from 'ai'
 
 import { genres } from '@/constants/ai'
 
@@ -50,4 +51,7 @@ export const continueTaleSchema = z.object({
   apiKey: z.string().optional()
 })
 
-export type ContinueTale = z.infer<typeof continueTaleSchema>
+type ContinueTaleSchemaType = z.infer<typeof continueTaleSchema>
+export type ContinueTale = Omit<ContinueTaleSchemaType, 'messages'> & {
+  messages: CoreMessage[]
+}
