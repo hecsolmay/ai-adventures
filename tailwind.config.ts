@@ -1,6 +1,7 @@
 import type { Config } from 'tailwindcss'
 
 import { nextui } from '@nextui-org/react'
+import typography from '@tailwindcss/typography'
 
 const config: Config = {
   content: [
@@ -17,11 +18,15 @@ const config: Config = {
       },
       maxWidth: {
         '8xl': '90rem'
+      },
+      fontFamily: {
+        cinzel: ['var(--font-cinzel)', 'sans-serif']
       }
     }
   },
   darkMode: 'class',
   plugins: [
+    typography,
     nextui({
       themes: {
         light: {
