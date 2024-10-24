@@ -6,5 +6,9 @@ export interface FragmentType {
   isError: boolean
 }
 
+export interface FragmentTypeWithSelection extends FragmentType {
+  choiceSelectedIndex: number | null
+}
+
 export type Provider = 'openai' | 'groq'
 export type LucideIconType = LucideIcon
