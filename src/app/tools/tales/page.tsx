@@ -1,4 +1,4 @@
-import { ReturnStepButton } from '@/components/tales/actions'
+import { ReturnStepButton, ScrollButton } from '@/components/tales/actions'
 import StepTalesTransition from '@/components/tales/step-transition'
 
 export default function TalesPage () {
@@ -6,6 +6,7 @@ export default function TalesPage () {
     <main className='relative mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8'>
       <ReturnStepButton />
       <StepTalesTransition />
+      <ScrollButton />
     </main>
   )
 }
