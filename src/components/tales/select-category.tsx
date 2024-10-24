@@ -7,8 +7,8 @@ import { genres as GENRES } from '@/constants/ai'
 export default function TalesSelectCategory () {
   return (
     <div className='min-h-[70dvh] space-y-8'>
-      <h1 className='text-center text-3xl font-bold opacity-85 lg:text-4xl'>
-        Selecciona tu categoría
+      <h1 className='pt-6 text-center text-3xl font-bold opacity-85 md:pt-0 lg:text-4xl'>
+        Selecciona el genero
       </h1>
 
       <div className='inline-flex w-full items-center justify-center'>
