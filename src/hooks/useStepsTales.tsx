@@ -6,9 +6,7 @@ export default function useStepsTales () {
     currentStep,
     setCurrentStep,
     genre,
-    setGenre,
-    isLoadingFragment,
-    setIsLoadingFragment
+    setGenre
   } = useStepTalesContext()
 
   const goNextStep = () => {
@@ -26,7 +24,6 @@ export default function useStepsTales () {
   const reboot = () => {
     setCurrentStep(0)
     setGenre(null)
-    setIsLoadingFragment(false)
   }
 
   return {
@@ -38,8 +35,6 @@ export default function useStepsTales () {
     isPrevStepAvailable: currentStep > 0,
     reboot,
     genre,
-    setGenre,
-    isLoadingFragment,
-    setIsLoadingFragment
+    setGenre
   }
 }
