@@ -6,9 +6,7 @@ const StepTalesContext = createContext<StepTalesContextType>({
   currentStep: 0,
   setCurrentStep: () => {},
   genre: null,
-  setGenre: () => {},
-  isLoadingFragment: false,
-  setIsLoadingFragment: () => {}
+  setGenre: () => {}
 })
 
 export function useStepTalesContext () {
@@ -18,7 +16,6 @@ export function useStepTalesContext () {
 export function StepTalesProvider ({ children }: { children: React.ReactNode }) {
   const [currentStep, setCurrentStep] = useState(0)
   const [genre, setGenre] = useState<string | null>(null)
-  const [isLoadingFragment, setIsLoadingFragment] = useState(false)
 
   return (
     <StepTalesContext.Provider
@@ -26,9 +23,7 @@ export function StepTalesProvider ({ children }: { children: React.ReactNode }) 
         currentStep,
         setCurrentStep,
         genre,
-        setGenre,
-        isLoadingFragment,
-        setIsLoadingFragment
+        setGenre
       }}
     >
       {children}

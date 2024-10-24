@@ -1,8 +1,22 @@
+import { type CoreMessage } from 'ai'
+import { type Dispatch, type SetStateAction } from 'react'
+
+import { type FragmentTypeWithSelection } from '@/types/index'
+
 export interface StepTalesContextType {
   currentStep: number
-  setCurrentStep: (step: number) => void
+  setCurrentStep: Dispatch<SetStateAction<number>>
   genre: string | null
-  setGenre: (category: string | null) => void
+  setGenre: Dispatch<SetStateAction<string | null>>
+}
+
+export interface TalesFragmentsContextType {
+  fragments: FragmentTypeWithSelection[]
+  setFragments: Dispatch<SetStateAction<FragmentTypeWithSelection[]>>
+  messages: CoreMessage[]
+  setMessages: Dispatch<SetStateAction<CoreMessage[]>>
   isLoadingFragment: boolean
-  setIsLoadingFragment: (isLoading: boolean) => void
+  setIsLoadingFragment: Dispatch<SetStateAction<boolean>>
+  prevGenre: string | null
+  setPrevGenre: Dispatch<SetStateAction<string | null>>
 }
