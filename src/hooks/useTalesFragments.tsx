@@ -1,3 +1,7 @@
+'use client'
+
+import { useEffect } from 'react'
+
 import { beginTaleStory, continueTaleStory } from '@/actions/tales'
 import { useTalesFragmentsContext } from '@/providers/context/tales-fragments-context'
 
@@ -12,6 +16,14 @@ export default function useTalesFragments () {
     prevGenre,
     setPrevGenre
   } = useTalesFragmentsContext()
+
+  useEffect(() => {
+    if (fragments.length <= 1) return
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: 'smooth'
+    })
+  }, [fragments.length, isLoadingFragment])
 
   const restartTales = () => {
     setFragments([])
@@ -38,6 +50,7 @@ export default function useTalesFragments () {
 
   const continueStory = async (choice: string) => {
     setIsLoadingFragment(true)
+
     try {
       const response = await continueTaleStory({
         messages,

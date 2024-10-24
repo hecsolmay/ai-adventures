@@ -46,7 +46,6 @@ export default function TalesCreation () {
             onSelectChoice={handleSelectChoice(index)}
           />
         ))}
-        <span></span>
       </ol>
 
       {isLoadingFragment && (
