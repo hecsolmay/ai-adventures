@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 
+import { Cinzel } from 'next/font/google'
 import localFont from 'next/font/local'
 
 import Footer from '@/components/common/footer'
@@ -18,9 +19,16 @@ const geistMono = localFont({
   weight: '100 900'
 })
 
+const cinzel = Cinzel({
+  subsets: ['latin'],
+  weight: ['500', '700'],
+  variable: '--font-cinzel'
+})
+
 export const metadata: Metadata = {
   title: 'AI Adventures',
-  description: 'AI Adventures es una plataforma que busca fomentar la interacción entre los usuarios y los modelos de IA para generar contenido personalizado y creativo.',
+  description:
+    'AI Adventures es una plataforma que busca fomentar la interacción entre los usuarios y los modelos de IA para generar contenido personalizado y creativo.',
   manifest: '/manifest.json'
 }
 
@@ -32,7 +40,7 @@ export default function RootLayout ({
   return (
     <html lang='en'>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} overflow-x-hidden scroll-smooth antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${cinzel.variable} overflow-x-hidden scroll-smooth antialiased`}
       >
         <Providers>
           <Navbar />
