@@ -14,15 +14,15 @@ export class TalesServices {
       content: replacePrompt
     })
 
-    const generatedResponse = await generate(messages, beginTale.apiKey)
+    const { fragment, rawMessage } = await generate(messages, beginTale.apiKey)
 
     messages.push({
       role: 'assistant',
-      content: generatedResponse.message
+      content: rawMessage
     })
 
     return {
-      ...generatedResponse,
+      ...fragment,
       messages
     }
   }
@@ -35,15 +35,18 @@ export class TalesServices {
       content: continueTale.choice
     })
 
-    const generatedResponse = await generate(messages, continueTale.apiKey)
+    const { fragment, rawMessage } = await generate(
+      messages,
+      continueTale.apiKey
+    )
 
     messages.push({
       role: 'assistant',
-      content: generatedResponse.message
+      content: rawMessage
     })
 
     return {
-      ...generatedResponse,
+      ...fragment,
       messages
     }
   }

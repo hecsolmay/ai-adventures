@@ -17,7 +17,7 @@ import {
 const regex = /\[(.*?)\]/g
 
 export async function generate (
-  messages: CoreMessage[],
+  rawMessages: CoreMessage[],
   apikey: string = '',
   provider: Provider = 'openai'
 ) {
@@ -27,6 +27,7 @@ export async function generate (
   let isChoicesValid: boolean = false
   let currentTry: number = 0
   let text: string = ''
+  const messages: CoreMessage[] = structuredClone(rawMessages)
 
   while (!isChoicesValid && currentTry < limitTries) {
     const result = await generateText({
@@ -51,7 +52,10 @@ export async function generate (
     throw new ChoicesError()
   }
 
-  return createFragment(text)
+  return {
+    rawMessage: text,
+    fragment: createFragment(text)
+  }
 }
 
 function validateChoices (text: string): boolean {
