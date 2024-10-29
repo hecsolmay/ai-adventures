@@ -3,6 +3,7 @@
 import { useEffect } from 'react'
 
 import { beginTaleStory, continueTaleStory } from '@/actions/tales'
+import { useSettings } from '@/hooks/useSettings'
 import { useTalesFragmentsContext } from '@/providers/context/tales-fragments-context'
 
 export default function useTalesFragments () {
@@ -16,6 +17,8 @@ export default function useTalesFragments () {
     prevGenre,
     setPrevGenre
   } = useTalesFragmentsContext()
+
+  const { selectedVoiceIndex } = useSettings()
 
   useEffect(() => {
     if (fragments.length <= 1) return
@@ -124,6 +127,8 @@ export default function useTalesFragments () {
 
     const messageToRead = `${foundFragment.message}\n ${addMessage}`
     const utterance = new SpeechSynthesisUtterance(messageToRead)
+    const voices = speechSynthesis.getVoices()
+    utterance.voice = voices[selectedVoiceIndex]
     window.speechSynthesis.speak(utterance)
     utterance.onend = () => {
       const finishedReadFragments = fragments.map(fragment => ({
