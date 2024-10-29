@@ -38,6 +38,10 @@ export default function useTalesFragments () {
     })
   }, [fragments.length, isLoadingFragment])
 
+  useEffect(() => {
+    window.speechSynthesis.addEventListener('', () => {})
+  }, [])
+
   const restartTales = () => {
     setFragments([])
     setMessages([])
@@ -52,7 +56,9 @@ export default function useTalesFragments () {
       const response = await beginTaleStory(genre)
       setPrevGenre(genre)
       const { messages, ...rawFragment } = response
-      setFragments([{ ...rawFragment, choiceSelectedIndex: null }])
+      setFragments([
+        { ...rawFragment, choiceSelectedIndex: null, isPlaying: false }
+      ])
       setMessages(messages)
     } catch (error) {
       console.error(error)
@@ -73,7 +79,7 @@ export default function useTalesFragments () {
       const { messages: responseMessages, ...rawFragment } = response
       setFragments(prev => [
         ...prev,
-        { ...rawFragment, choiceSelectedIndex: null }
+        { ...rawFragment, choiceSelectedIndex: null, isPlaying: false }
       ])
       setMessages(responseMessages)
     } catch (error) {
@@ -81,6 +87,71 @@ export default function useTalesFragments () {
     } finally {
       setIsLoadingFragment(false)
     }
+  }
+
+  const playSpeechTale = (taleIndex: number) => {
+    const cloneTalesFragments = structuredClone(fragments)
+    const foundFragment = cloneTalesFragments[taleIndex]
+
+    if (foundFragment == null) return
+
+    const newFragments = cloneTalesFragments.map((fragment, index) => {
+      if (index === taleIndex) {
+        return {
+          ...fragment,
+          isPlaying: true
+        }
+      }
+      return {
+        ...fragment,
+        isPlaying: false
+      }
+    })
+
+    setFragments(newFragments)
+    window.speechSynthesis.cancel()
+
+    let addMessage = ''
+    const joinChoices = foundFragment.choices.join('. ')
+
+    if (foundFragment.choiceSelectedIndex !== null) {
+      addMessage = `${
+        foundFragment.choices[foundFragment.choiceSelectedIndex]
+      }. `
+    } else {
+      addMessage = `Escoge una opción para continuar la historia. ${joinChoices}`
+    }
+
+    const messageToRead = `${foundFragment.message}\n ${addMessage}`
+    const utterance = new SpeechSynthesisUtterance(messageToRead)
+    window.speechSynthesis.speak(utterance)
+    utterance.onend = () => {
+      const finishedReadFragments = fragments.map(fragment => ({
+        ...fragment,
+        isPlaying: false
+      }))
+      setFragments(finishedReadFragments)
+    }
+  }
+
+  const stopSpeechTale = (taleIndex: number) => {
+    const foundFragment = fragments[taleIndex]
+
+    if (foundFragment == null || !foundFragment.isPlaying) return
+
+    setFragments(prev => [
+      ...prev.map((fragment, index) => {
+        if (index === taleIndex) {
+          return {
+            ...fragment,
+            isPlaying: false
+          }
+        }
+        return fragment
+      })
+    ])
+
+    window.speechSynthesis.cancel()
   }
 
   return {
@@ -93,6 +164,8 @@ export default function useTalesFragments () {
     restartTales,
     startTale,
     continueStory,
-    prevGenre
+    prevGenre,
+    playSpeechTale,
+    stopSpeechTale
   }
 }

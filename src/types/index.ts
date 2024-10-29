@@ -8,6 +8,7 @@ export interface FragmentType {
 
 export interface FragmentTypeWithSelection extends FragmentType {
   choiceSelectedIndex: number | null
+  isPlaying: boolean
 }
 
 export type Provider = 'openai' | 'groq'

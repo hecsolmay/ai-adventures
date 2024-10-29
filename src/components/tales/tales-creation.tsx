@@ -15,7 +15,9 @@ export default function TalesCreation () {
     startTale,
     continueStory,
     prevGenre,
-    restartTales
+    restartTales,
+    playSpeechTale,
+    stopSpeechTale
   } = useTalesFragments()
   const { genre } = useStepsTales()
 
@@ -44,6 +46,12 @@ export default function TalesCreation () {
             key={index}
             fragment={fragment}
             onSelectChoice={handleSelectChoice(index)}
+            playSpeechTale={() => {
+              playSpeechTale(index)
+            }}
+            stopSpeechTale={() => {
+              stopSpeechTale(index)
+            }}
           />
         ))}
       </ol>
