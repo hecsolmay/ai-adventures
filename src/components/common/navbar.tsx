@@ -14,6 +14,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 
+import SettingsButton from '@/components/common/settings-button'
 import BrandLogo from '@/components/icons/brand-logo'
 import BrandText from '@/components/icons/brand-text'
 import { navbarLinks } from '@/constants'
@@ -58,6 +59,10 @@ export default function Navbar () {
       </NavbarContent>
       <NavbarContent justify='end'>
         <NavbarItem>
+          <SettingsButton />
+        </NavbarItem>
+
+        <NavbarItem className='hidden sm:flex'>
           <NextUILink href='#'>Iniciar Sesión</NextUILink>
         </NavbarItem>
       </NavbarContent>
