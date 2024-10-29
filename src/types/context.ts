@@ -20,3 +20,8 @@ export interface TalesFragmentsContextType {
   prevGenre: string | null
   setPrevGenre: Dispatch<SetStateAction<string | null>>
 }
+
+export interface SettingsContextType {
+  selectedVoiceIndex: number
+  setSelectedVoiceIndex: Dispatch<SetStateAction<number>>
+}
