@@ -27,14 +27,14 @@ export default function LandingPage () {
         transition={{ duration: 0.8 }}
         className='w-full py-12 md:py-24 lg:py-32'
       >
-        <Captures />
+        <Introduction />
       </FadeInContainer>
       <FadeInContainer
         initial={{ opacity: 0, y: 50 }}
         transition={{ duration: 0.8 }}
         className='w-full bg-gray-100 py-12 md:py-24 lg:py-32'
       >
-        <Introduction />
+        <Captures />
       </FadeInContainer>
       <FadeInContainer
         initial={{ opacity: 0, y: 50 }}
