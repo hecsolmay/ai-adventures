@@ -1,5 +1,4 @@
 import { BookOpen, Sparkles, Zap } from 'lucide-react'
-import Image from 'next/image'
 
 export default function Introduction () {
   return (
@@ -31,12 +30,12 @@ export default function Introduction () {
           </ul>
         </div>
         <div className='flex items-center justify-center'>
-          <Image
-            src='https://g-1x6hvq5bd3t.vusercontent.net/placeholder.svg'
+          <img
+            src='/assets/images/landing-info.webp'
             width={550}
             height={550}
             alt='AI Adventures educational interface'
-            className='h-auto w-full rounded-xl shadow-lg'
+            className='aspect-square h-auto w-full rounded-xl shadow-lg'
           />
         </div>
       </div>

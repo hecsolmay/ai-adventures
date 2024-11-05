@@ -1,6 +1,5 @@
 import { Button } from '@nextui-org/react'
 import { ArrowRight } from 'lucide-react'
-import Image from 'next/image'
 import Link from 'next/link'
 
 export default function Captures () {
@@ -19,30 +18,24 @@ export default function Captures () {
         <div className='w-full max-w-full space-y-4'>
           <div className='grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3'>
             <div className='overflow-hidden rounded-lg shadow-lg'>
-              <Image
-                src='https://g-1x6hvq5bd3t.vusercontent.net/placeholder.svg'
-                width={600}
-                height={400}
-                alt='AI-generated story scene'
-                className='h-auto w-full'
+              <img
+                src='/assets/images/landing-intro.webp'
+                alt='Imagen de la pantalla de introducción a la creación de un cuento'
+                className='aspect-auto size-full object-cover md:aspect-square'
               />
             </div>
             <div className='overflow-hidden rounded-lg shadow-lg'>
-              <Image
-                src='https://g-1x6hvq5bd3t.vusercontent.net/placeholder.svg'
-                width={600}
-                height={400}
-                alt='Child interacting with AI story'
-                className='h-auto w-full'
+              <img
+                src='/assets/images/landing-select-gender.webp'
+                alt='Captura de la selección del género del cuento'
+                className='aspect-auto size-full object-cover md:aspect-square'
               />
             </div>
             <div className='overflow-hidden rounded-lg shadow-lg'>
-              <Image
-                src='https://g-1x6hvq5bd3t.vusercontent.net/placeholder.svg'
-                width={600}
-                height={400}
-                alt='Educational AI adventure'
-                className='h-auto w-full'
+              <img
+                src='/assets/images/landing-tale.webp'
+                alt='Captura de la creación de un cuento'
+                className='aspect-auto size-full object-cover md:aspect-square'
               />
             </div>
           </div>
