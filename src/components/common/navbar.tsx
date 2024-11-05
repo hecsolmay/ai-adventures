@@ -12,7 +12,6 @@ import {
 } from '@nextui-org/react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useState } from 'react'
 
 import SettingsButton from '@/components/common/settings-button'
 import BrandLogo from '@/components/icons/brand-logo'
@@ -20,16 +19,14 @@ import BrandText from '@/components/icons/brand-text'
 import { navbarLinks } from '@/constants'
 
 export default function Navbar () {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const pathname = usePathname()
 
   const getIsActive = (href: string) => pathname === href
 
   return (
-    <NavbarNextUI onMenuOpenChange={setIsMenuOpen}>
+    <NavbarNextUI>
       <NavbarContent>
         <NavbarMenuToggle
-          aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
           className='sm:hidden'
         />
         <Link href='/'>

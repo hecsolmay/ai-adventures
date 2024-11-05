@@ -22,6 +22,7 @@ export default function SettingsButton () {
   const { onOpen, isOpen, onOpenChange } = useDisclosure()
   const { selectedVoiceIndex, setSelectedVoiceIndex } = useSettings()
   const [isServerRender, setIsServerRender] = useState(true)
+  const [isOpenSelect, setIsOpenSelect] = useState(false)
 
   useEffect(() => {
     if (typeof window === 'undefined') return
@@ -31,16 +32,22 @@ export default function SettingsButton () {
   if (isServerRender) return null
 
   const voices = speechSynthesis.getVoices()
+  console.log({ voices })
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const { value } = event.target
     const parse = Number(value)
+    console.log({ parse })
     if (value === '' || isNaN(parse)) {
+      onOpen()
+      setIsOpenSelect(false)
       setSelectedVoiceIndex(DEFAULT_VOICE_INDEX)
       return
     }
 
     setSelectedVoiceIndex(parse)
+    onOpen()
+    setIsOpenSelect(false)
   }
 
   const handleListenVoice = () => {
@@ -51,6 +58,17 @@ export default function SettingsButton () {
     utterance.voice = voice
     speechSynthesis.cancel()
     speechSynthesis.speak(utterance)
+  }
+
+  const handleClickSelect = () => {
+    setIsOpenSelect(!isOpenSelect)
+  }
+
+  const handleClickItem = (voice: SpeechSynthesisVoice) => () => {
+    setSelectedVoiceIndex(voices.indexOf(voice))
+    console.log({ voiceSelected: voices.indexOf(voice) })
+    onOpen()
+    setIsOpenSelect(false)
   }
 
   return (
@@ -75,11 +93,13 @@ export default function SettingsButton () {
                   <Select
                     label='Selecciona una voz'
                     className='max-w-64'
-                    defaultSelectedKeys={[selectedVoiceIndex.toString()]}
+                    isOpen={isOpenSelect}
+                    onClick={handleClickSelect}
+                    selectedKeys={[selectedVoiceIndex.toString()]}
                     onChange={handleChange}
                   >
                     {voices.map((voice, index) => (
-                      <SelectItem key={index} value={index}>
+                      <SelectItem onClick={handleClickItem(voice)} key={index} value={index}>
                         {voice.name}
                       </SelectItem>
                     ))}
