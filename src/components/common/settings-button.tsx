@@ -32,12 +32,10 @@ export default function SettingsButton () {
   if (isServerRender) return null
 
   const voices = speechSynthesis.getVoices()
-  console.log({ voices })
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const { value } = event.target
     const parse = Number(value)
-    console.log({ parse })
     if (value === '' || isNaN(parse)) {
       onOpen()
       setIsOpenSelect(false)
@@ -66,7 +64,6 @@ export default function SettingsButton () {
 
   const handleClickItem = (voice: SpeechSynthesisVoice) => () => {
     setSelectedVoiceIndex(voices.indexOf(voice))
-    console.log({ voiceSelected: voices.indexOf(voice) })
     onOpen()
     setIsOpenSelect(false)
   }
