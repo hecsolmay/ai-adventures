@@ -1,10 +1,12 @@
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 
+import { DEFAULT_SETTINGS_VALUES } from '@/constants'
 import { type SettingsContextType } from '@/types/context'
+import { getSettingsFromLocalStorage } from '@/utils/localStorage'
 
 const SettingsContext = createContext<SettingsContextType>({
-  selectedVoiceIndex: 0,
-  setSelectedVoiceIndex: () => {}
+  setSelectedVoiceIndex: () => {},
+  ...DEFAULT_SETTINGS_VALUES
 })
 
 export function useSettingsContext () {
@@ -13,6 +15,11 @@ export function useSettingsContext () {
 
 export function SettingsProvider ({ children }: { children: React.ReactNode }) {
   const [selectedVoiceIndex, setSelectedVoiceIndex] = useState(0)
+
+  useEffect(() => {
+    const settings = getSettingsFromLocalStorage()
+    setSelectedVoiceIndex(settings.selectedVoiceIndex)
+  }, [])
 
   return (
     <SettingsContext.Provider

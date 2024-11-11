@@ -13,3 +13,6 @@ export interface FragmentTypeWithSelection extends FragmentType {
 
 export type Provider = 'openai' | 'groq'
 export type LucideIconType = LucideIcon
+export interface SettingsType {
+  selectedVoiceIndex: number
+}

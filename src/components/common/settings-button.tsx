@@ -15,37 +15,40 @@ import { Play, Settings } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 
 import { useSettings } from '@/hooks/useSettings'
-
-const DEFAULT_VOICE_INDEX = 0
+import { DEFAULT_VOICE_INDEX } from '@/constants'
 
 export default function SettingsButton () {
   const { onOpen, isOpen, onOpenChange } = useDisclosure()
-  const { selectedVoiceIndex, setSelectedVoiceIndex } = useSettings()
-  const [isServerRender, setIsServerRender] = useState(true)
+  const {
+    selectedVoiceIndex,
+    setSelectedVoiceIndex,
+    handleRestoreSettings,
+    handleSaveSettings
+  } = useSettings()
   const [isOpenSelect, setIsOpenSelect] = useState(false)
+  const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([])
 
   useEffect(() => {
-    if (typeof window === 'undefined') return
-    setIsServerRender(false)
-  }, [])
+    setVoices(speechSynthesis.getVoices())
 
-  if (isServerRender) return null
+    return () => {
+      speechSynthesis.cancel()
+    }
+  }, [speechSynthesis.getVoices().length])
 
-  const voices = speechSynthesis.getVoices()
+  const changeVoice = (voiceIndex: number) => {
+    setSelectedVoiceIndex(voiceIndex)
+    onOpen()
+    setIsOpenSelect(false)
+  }
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const { value } = event.target
     const parse = Number(value)
-    if (value === '' || isNaN(parse)) {
-      onOpen()
-      setIsOpenSelect(false)
-      setSelectedVoiceIndex(DEFAULT_VOICE_INDEX)
-      return
-    }
+    const voiceSelected =
+      value === '' || isNaN(parse) ? DEFAULT_VOICE_INDEX : parse
 
-    setSelectedVoiceIndex(parse)
-    onOpen()
-    setIsOpenSelect(false)
+    changeVoice(voiceSelected)
   }
 
   const handleListenVoice = () => {
@@ -63,9 +66,12 @@ export default function SettingsButton () {
   }
 
   const handleClickItem = (voice: SpeechSynthesisVoice) => () => {
-    setSelectedVoiceIndex(voices.indexOf(voice))
-    onOpen()
-    setIsOpenSelect(false)
+    changeVoice(voices.indexOf(voice))
+  }
+
+  const getSelectedKey = () => {
+    if (voices.length === 0 || selectedVoiceIndex >= voices.length) return []
+    return [selectedVoiceIndex.toString()]
   }
 
   return (
@@ -78,7 +84,13 @@ export default function SettingsButton () {
       >
         <Settings size={20} />
       </Button>
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+      <Modal
+        isOpen={isOpen}
+        onClose={() => {
+          handleRestoreSettings()
+        }}
+        onOpenChange={onOpenChange}
+      >
         <ModalContent>
           {onClose => (
             <>
@@ -92,11 +104,15 @@ export default function SettingsButton () {
                     className='max-w-64'
                     isOpen={isOpenSelect}
                     onClick={handleClickSelect}
-                    selectedKeys={[selectedVoiceIndex.toString()]}
+                    selectedKeys={getSelectedKey()}
                     onChange={handleChange}
                   >
                     {voices.map((voice, index) => (
-                      <SelectItem onClick={handleClickItem(voice)} key={index} value={index}>
+                      <SelectItem
+                        onClick={handleClickItem(voice)}
+                        key={index}
+                        value={index}
+                      >
                         {voice.name}
                       </SelectItem>
                     ))}
@@ -113,10 +129,22 @@ export default function SettingsButton () {
                 </div>
               </ModalBody>
               <ModalFooter>
-                <Button color='danger' variant='light' onPress={onClose}>
+                <Button
+                  color='danger'
+                  variant='light'
+                  onPress={() => {
+                    onClose()
+                  }}
+                >
                   Cerrar
                 </Button>
-                <Button color='warning' onPress={onClose}>
+                <Button
+                  color='warning'
+                  onPress={() => {
+                    handleSaveSettings()
+                    onClose()
+                  }}
+                >
                   Guardar
                 </Button>
               </ModalFooter>
