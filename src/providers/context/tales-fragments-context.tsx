@@ -12,7 +12,9 @@ const TalesFragmentsContext = createContext<TalesFragmentsContextType>({
   isLoadingFragment: false,
   setIsLoadingFragment: () => {},
   prevGenre: null,
-  setPrevGenre: () => {}
+  setPrevGenre: () => {},
+  isError: false,
+  setIsError: () => {}
 })
 
 export function useTalesFragmentsContext () {
@@ -28,6 +30,7 @@ export function TalesFragmentsProvider ({
   const [messages, setMessages] = useState<CoreMessage[]>([])
   const [isLoadingFragment, setIsLoadingFragment] = useState(false)
   const [prevGenre, setPrevGenre] = useState<string | null>(null)
+  const [isError, setIsError] = useState(false)
 
   return (
     <TalesFragmentsContext.Provider
@@ -39,7 +42,9 @@ export function TalesFragmentsProvider ({
         isLoadingFragment,
         setIsLoadingFragment,
         prevGenre,
-        setPrevGenre
+        setPrevGenre,
+        isError,
+        setIsError
       }}
     >
       {children}

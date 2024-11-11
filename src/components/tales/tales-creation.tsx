@@ -3,6 +3,7 @@
 import { useEffect } from 'react'
 
 import LoadingStoryFragment from '@/components/loaders/story-fragment-loader'
+import { ErrorMessage } from '@/components/tales/actions'
 import { StoryFragment } from '@/components/tales/fragments'
 import useStepsTales from '@/hooks/useStepsTales'
 import useTalesFragments from '@/hooks/useTalesFragments'
@@ -17,7 +18,8 @@ export default function TalesCreation () {
     prevGenre,
     restartTales,
     playSpeechTale,
-    stopSpeechTale
+    stopSpeechTale,
+    isError
   } = useTalesFragments()
   const { genre } = useStepsTales()
 
@@ -34,6 +36,20 @@ export default function TalesCreation () {
     newFragments[index].choiceSelectedIndex = choiceIndex
     setFragments(newFragments)
     continueStory(newFragments[index].choices[choiceIndex])
+  }
+
+  const retryStory = () => {
+    if (fragments.length === 0) {
+      if (prevGenre !== genre) {
+        restartTales()
+      }
+      startTale(genre)
+      return
+    }
+    const lastFragment = fragments[fragments.length - 1]
+    console.log({ lastFragment })
+    if (lastFragment?.choiceSelectedIndex === null) return
+    continueStory(lastFragment.choices[lastFragment.choiceSelectedIndex])
   }
 
   const isFirstMessageCreating = fragments.length === 0
@@ -65,6 +81,8 @@ export default function TalesCreation () {
           }
         />
       )}
+
+      {!isLoadingFragment && isError && <ErrorMessage onRetry={retryStory} />}
     </div>
   )
 }

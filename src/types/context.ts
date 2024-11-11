@@ -19,6 +19,8 @@ export interface TalesFragmentsContextType {
   setIsLoadingFragment: Dispatch<SetStateAction<boolean>>
   prevGenre: string | null
   setPrevGenre: Dispatch<SetStateAction<string | null>>
+  isError: boolean
+  setIsError: Dispatch<SetStateAction<boolean>>
 }
 
 export interface SettingsContextType {

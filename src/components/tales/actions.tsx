@@ -5,7 +5,9 @@ import {
   ArrowDown,
   ArrowUp,
   BookOpenText,
+  Bot,
   ChevronRight,
+  RotateCw,
   Undo2
 } from 'lucide-react'
 import { AnimatePresence, motion } from 'framer-motion'
@@ -205,5 +207,21 @@ export function ScrollButton () {
         </motion.div>
       )}
     </AnimatePresence>
+  )
+}
+
+interface ErrorMessageProps {
+  onRetry?: () => void
+}
+
+export function ErrorMessage ({ onRetry }: ErrorMessageProps) {
+  return (
+    <div className='flex flex-col items-center justify-center gap-2 text-red-600'>
+      <Bot className='size-12' />
+      <p>Algo salió mal, intenta nuevamente</p>
+      <Button isIconOnly color='danger' className='bg-red-600'>
+        <RotateCw className='size-5' onClick={onRetry} />
+      </Button>
+    </div>
   )
 }

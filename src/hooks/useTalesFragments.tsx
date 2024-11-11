@@ -15,7 +15,9 @@ export default function useTalesFragments () {
     isLoadingFragment,
     setIsLoadingFragment,
     prevGenre,
-    setPrevGenre
+    setPrevGenre,
+    isError,
+    setIsError
   } = useTalesFragmentsContext()
 
   const { selectedVoiceIndex } = useSettings()
@@ -50,6 +52,7 @@ export default function useTalesFragments () {
     setMessages([])
     setIsLoadingFragment(true)
     setPrevGenre(null)
+    setIsError(false)
   }
 
   const startTale = async (genre: string | null) => {
@@ -65,6 +68,7 @@ export default function useTalesFragments () {
       setMessages(messages)
     } catch (error) {
       console.error(error)
+      setIsError(true)
     } finally {
       setIsLoadingFragment(false)
     }
@@ -72,7 +76,7 @@ export default function useTalesFragments () {
 
   const continueStory = async (choice: string) => {
     setIsLoadingFragment(true)
-
+    setIsError(false)
     try {
       const response = await continueTaleStory({
         messages,
@@ -87,6 +91,7 @@ export default function useTalesFragments () {
       setMessages(responseMessages)
     } catch (error) {
       console.error(error)
+      setIsError(true)
     } finally {
       setIsLoadingFragment(false)
     }
@@ -171,6 +176,7 @@ export default function useTalesFragments () {
     continueStory,
     prevGenre,
     playSpeechTale,
-    stopSpeechTale
+    stopSpeechTale,
+    isError
   }
 }
