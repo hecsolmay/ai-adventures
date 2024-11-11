@@ -1,5 +1,6 @@
 import { beginTaleSchema } from '@/schemas/tales'
 import { TalesServices } from '@/services/tales'
+import { handleErrorResponse } from '@/utils/api'
 
 export async function POST (request: Request) {
   const body = await request.json()
@@ -19,7 +20,6 @@ export async function POST (request: Request) {
 
     return Response.json(response)
   } catch (error) {
-    console.error(error)
-    return Response.json({ error: 'Something went wrong' }, { status: 500 })
+    return handleErrorResponse(error)
   }
 }

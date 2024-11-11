@@ -13,6 +13,7 @@ import {
   aiTemperature,
   reinforcePromptChoices
 } from '@/constants/ai'
+import { AIError } from '@/errors/AIError'
 
 const regex = /\[(.*?)\]/g
 
@@ -30,22 +31,27 @@ export async function generate (
   const messages: CoreMessage[] = structuredClone(rawMessages)
 
   while (!isChoicesValid && currentTry < limitTries) {
-    const result = await generateText({
-      model,
-      messages,
-      temperature: aiTemperature,
-      maxTokens: aiMaxTokens
-    })
-
-    text = result.text
-    isChoicesValid = validateChoices(text)
-    if (!isChoicesValid) {
-      messages.push({
-        role: 'system',
-        content: reinforcePromptChoices
+    try {
+      const result = await generateText({
+        model,
+        messages,
+        temperature: aiTemperature,
+        maxTokens: aiMaxTokens
       })
+
+      text = result.text
+      isChoicesValid = validateChoices(text)
+      if (!isChoicesValid) {
+        messages.push({
+          role: 'system',
+          content: reinforcePromptChoices
+        })
+      }
+      currentTry++
+    } catch (error) {
+      console.error(error)
+      throw new AIError()
     }
-    currentTry++
   }
 
   if (!isChoicesValid) {
