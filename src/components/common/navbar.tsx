@@ -10,13 +10,19 @@ import {
   Navbar as NavbarNextUI,
   Link as NextUILink
 } from '@nextui-org/react'
+import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-import SettingsButton from '@/components/common/settings-button'
 import BrandLogo from '@/components/icons/brand-logo'
 import BrandText from '@/components/icons/brand-text'
+import { SettingsButtonFallback } from '@/components/loaders/settings-fallback'
 import { navbarLinks } from '@/constants'
+
+const SettingsButton = dynamic(
+  async () => await import('@/components/common/settings-button'),
+  { ssr: false, loading: () => <SettingsButtonFallback /> }
+)
 
 export default function Navbar () {
   const pathname = usePathname()
@@ -26,9 +32,7 @@ export default function Navbar () {
   return (
     <NavbarNextUI>
       <NavbarContent>
-        <NavbarMenuToggle
-          className='sm:hidden'
-        />
+        <NavbarMenuToggle className='sm:hidden' />
         <Link href='/'>
           <NavbarBrand>
             <BrandLogo className='size-8 pt-1' />

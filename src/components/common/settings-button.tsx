@@ -29,12 +29,13 @@ export default function SettingsButton () {
   const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([])
 
   useEffect(() => {
-    setVoices(speechSynthesis.getVoices())
+    const newVoices = speechSynthesis.getVoices()
+    setVoices(newVoices)
 
     return () => {
       speechSynthesis.cancel()
     }
-  }, [speechSynthesis.getVoices().length])
+  }, [])
 
   const changeVoice = (voiceIndex: number) => {
     setSelectedVoiceIndex(voiceIndex)
