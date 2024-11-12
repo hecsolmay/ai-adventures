@@ -4,6 +4,7 @@ export interface FragmentType {
   message: string
   choices: string[]
   isError: boolean
+  backgroundDescription: string
 }
 
 export interface FragmentTypeWithSelection extends FragmentType {

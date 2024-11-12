@@ -16,6 +16,7 @@ import {
 import { AIError } from '@/errors/AIError'
 
 const regex = /\[(.*?)\]/g
+const regexBackground = /\{(.*?)\}/
 
 export async function generate (
   rawMessages: CoreMessage[],
@@ -71,14 +72,23 @@ function validateChoices (text: string): boolean {
 function createFragment (text: string): FragmentType {
   const choices: string[] = []
   let message: string = text
+  let backgroundDescription = ''
   let match
   while ((match = regex.exec(text)) !== null) {
     choices.push(match[1])
     message = message.replace(match[0], '')
   }
 
+  const backgroundMatch = regexBackground.exec(message)
+
+  if (backgroundMatch !== null && backgroundMatch.length > 1) {
+    backgroundDescription = backgroundMatch[1]
+    message = message.replace(backgroundMatch[0], '')
+  }
+
   return {
-    message,
+    message: message.trim(),
+    backgroundDescription,
     choices,
     isError: false
   }
