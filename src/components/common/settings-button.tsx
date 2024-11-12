@@ -14,8 +14,9 @@ import {
 import { Play, Settings } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 
-import { useSettings } from '@/hooks/useSettings'
+import { SettingsButtonFallback } from '@/components/loaders/settings-fallback'
 import { DEFAULT_VOICE_INDEX } from '@/constants'
+import { useSettings } from '@/hooks/useSettings'
 
 export default function SettingsButton () {
   const { onOpen, isOpen, onOpenChange } = useDisclosure()
@@ -27,6 +28,11 @@ export default function SettingsButton () {
   } = useSettings()
   const [isOpenSelect, setIsOpenSelect] = useState(false)
   const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([])
+  const [isClient, setIsClient] = useState(false)
+
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
 
   useEffect(() => {
     const newVoices = speechSynthesis.getVoices()
@@ -35,7 +41,9 @@ export default function SettingsButton () {
     return () => {
       speechSynthesis.cancel()
     }
-  }, [])
+  }, [isClient])
+
+  if (!isClient) return <SettingsButtonFallback />
 
   const changeVoice = (voiceIndex: number) => {
     setSelectedVoiceIndex(voiceIndex)
