@@ -1,5 +1,5 @@
 import { type CoreMessage } from 'ai'
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext, useRef, useState } from 'react'
 
 import { type FragmentTypeWithSelection } from '@/types'
 import { type TalesFragmentsContextType } from '@/types/context'
@@ -12,9 +12,13 @@ const TalesFragmentsContext = createContext<TalesFragmentsContextType>({
   isLoadingFragment: false,
   setIsLoadingFragment: () => {},
   prevGenre: null,
-  setPrevGenre: () => {},
+  changePrevGenre: (_genre: string | null) => {},
   isError: false,
-  setIsError: () => {}
+  setIsError: () => {},
+  characterPublicId: null,
+  setCharacterPublicId: () => {},
+  prevCharacterPublicId: null,
+  changePrevCharacterPublicId: (_characterPublicId: string | null) => {}
 })
 
 export function useTalesFragmentsContext () {
@@ -29,8 +33,20 @@ export function TalesFragmentsProvider ({
   const [fragments, setFragments] = useState<FragmentTypeWithSelection[]>([])
   const [messages, setMessages] = useState<CoreMessage[]>([])
   const [isLoadingFragment, setIsLoadingFragment] = useState(false)
-  const [prevGenre, setPrevGenre] = useState<string | null>(null)
+  const prevGenre = useRef<string | null>(null)
   const [isError, setIsError] = useState(false)
+  const [characterPublicId, setCharacterPublicId] = useState<string | null>(
+    null
+  )
+  const prevCharacterPublicId = useRef<string | null>(null)
+
+  const changePrevGenre = (genre: string | null) => {
+    prevGenre.current = genre
+  }
+
+  const changePrevCharacterPublicId = (characterPublicId: string | null) => {
+    prevCharacterPublicId.current = characterPublicId
+  }
 
   return (
     <TalesFragmentsContext.Provider
@@ -41,10 +57,14 @@ export function TalesFragmentsProvider ({
         setMessages,
         isLoadingFragment,
         setIsLoadingFragment,
-        prevGenre,
-        setPrevGenre,
+        prevGenre: prevGenre.current,
+        changePrevGenre,
         isError,
-        setIsError
+        setIsError,
+        characterPublicId,
+        setCharacterPublicId,
+        prevCharacterPublicId: prevCharacterPublicId.current,
+        changePrevCharacterPublicId
       }}
     >
       {children}

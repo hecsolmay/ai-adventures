@@ -18,9 +18,13 @@ export interface TalesFragmentsContextType {
   isLoadingFragment: boolean
   setIsLoadingFragment: Dispatch<SetStateAction<boolean>>
   prevGenre: string | null
-  setPrevGenre: Dispatch<SetStateAction<string | null>>
+  changePrevGenre: (genre: string | null) => void
   isError: boolean
   setIsError: Dispatch<SetStateAction<boolean>>
+  characterPublicId: string | null
+  setCharacterPublicId: Dispatch<SetStateAction<string | null>>
+  prevCharacterPublicId: string | null
+  changePrevCharacterPublicId: (characterPublicId: string | null) => void
 }
 
 export interface SettingsContextType {
