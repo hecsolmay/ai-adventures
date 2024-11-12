@@ -38,6 +38,14 @@ export default function TalesCreation () {
     continueStory(newFragments[index].choices[choiceIndex])
   }
 
+  const handleCreateChoice = (index: number) => (choice: string) => {
+    const newFragments = structuredClone(fragments)
+    newFragments[index].choices.push(choice)
+    newFragments[index].choiceSelectedIndex = newFragments[index].choices.length - 1
+    setFragments(newFragments)
+    continueStory(choice)
+  }
+
   const retryStory = () => {
     if (fragments.length === 0) {
       if (prevGenre !== genre) {
@@ -47,7 +55,6 @@ export default function TalesCreation () {
       return
     }
     const lastFragment = fragments[fragments.length - 1]
-    console.log({ lastFragment })
     if (lastFragment?.choiceSelectedIndex === null) return
     continueStory(lastFragment.choices[lastFragment.choiceSelectedIndex])
   }
@@ -62,6 +69,7 @@ export default function TalesCreation () {
             key={index}
             fragment={fragment}
             onSelectChoice={handleSelectChoice(index)}
+            onCreateChoice={handleCreateChoice(index)}
             playSpeechTale={() => {
               playSpeechTale(index)
             }}
