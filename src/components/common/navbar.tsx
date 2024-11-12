@@ -13,6 +13,7 @@ import {
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { useState } from 'react'
 
 import BrandLogo from '@/components/icons/brand-logo'
 import BrandText from '@/components/icons/brand-text'
@@ -26,11 +27,12 @@ const SettingsButton = dynamic(
 
 export default function Navbar () {
   const pathname = usePathname()
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const getIsActive = (href: string) => pathname === href
 
   return (
-    <NavbarNextUI>
+    <NavbarNextUI isMenuOpen={isMenuOpen} onMenuOpenChange={setIsMenuOpen}>
       <NavbarContent>
         <NavbarMenuToggle className='sm:hidden' />
         <Link href='/'>
@@ -73,6 +75,7 @@ export default function Navbar () {
           return (
             <NavbarMenuItem key={href} isActive={isActive}>
               <NextUILink
+                onClick={() => { setIsMenuOpen(false) }}
                 color={isActive ? 'primary' : 'foreground'}
                 className='w-full'
                 href={href}
