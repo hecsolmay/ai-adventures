@@ -1,12 +1,22 @@
 'use client'
 
-import { Button, Tooltip } from '@nextui-org/react'
+import {
+  Button,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  Tooltip,
+  useDisclosure
+} from '@nextui-org/react'
 import {
   ArrowDown,
   ArrowUp,
   BookOpenText,
   Bot,
   ChevronRight,
+  RefreshCw,
   RotateCw,
   Undo2
 } from 'lucide-react'
@@ -223,5 +233,72 @@ export function ErrorMessage ({ onRetry }: ErrorMessageProps) {
         <RotateCw className='size-5' onClick={onRetry} />
       </Button>
     </div>
+  )
+}
+
+export function RestartTaleButton () {
+  const { restartTales } = useTalesFragments()
+  const { isOpen, onOpen, onOpenChange } = useDisclosure()
+  const { currentStep, setCurrentStep, setGenre } = useStepsTales()
+  const handleClick = () => {
+    if (currentStep === 0) return
+    onOpen()
+  }
+
+  const handleRestart = (onClose: () => void) => () => {
+    if (currentStep === 0) return
+    setCurrentStep(1)
+    scrollToTop()
+    restartTales()
+    onClose()
+    setGenre(null)
+  }
+
+  if (currentStep === 0) return null
+
+  return (
+    <>
+      <Tooltip showArrow content='Reiniciar el cuento' placement='bottom-end'>
+        <Button
+          isIconOnly
+          className='absolute right-6 top-4 text-white disabled:opacity-70 disabled:hover:opacity-70'
+          color='primary'
+          onClick={handleClick}
+        >
+          <RefreshCw className='size-5' />
+        </Button>
+      </Tooltip>
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+        <ModalContent>
+          {onClose => (
+            <>
+              <ModalHeader className='flex flex-col gap-1'>
+                ¿Estás seguro de que quieres reiniciar el cuento?
+              </ModalHeader>
+              <ModalBody>
+                <p>
+                  Al reiniciar el cuento, se{' '}
+                  <span className='font-bold'>borrará</span> todo el progreso y
+                  se comenzará de nuevo.
+                </p>
+                <p>¿Estás seguro de que quieres reiniciar el cuento?</p>
+              </ModalBody>
+              <ModalFooter>
+                <Button color='danger' variant='light' onPress={onClose}>
+                  Cancelar
+                </Button>
+                <Button
+                  className='text-white '
+                  color='primary'
+                  onPress={handleRestart(onClose)}
+                >
+                  Reiniciar
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
+    </>
   )
 }

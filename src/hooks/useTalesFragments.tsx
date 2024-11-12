@@ -43,14 +43,9 @@ export default function useTalesFragments () {
     })
   }, [fragments.length, isLoadingFragment])
 
-  useEffect(() => {
-    window.speechSynthesis.addEventListener('', () => {})
-  }, [])
-
   const restartTales = () => {
     setFragments([])
     setMessages([])
-    setIsLoadingFragment(true)
     setPrevGenre(null)
     setIsError(false)
   }

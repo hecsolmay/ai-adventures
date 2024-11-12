@@ -1,4 +1,4 @@
-import { ReturnStepButton, ScrollButton } from '@/components/tales/actions'
+import { RestartTaleButton, ReturnStepButton, ScrollButton } from '@/components/tales/actions'
 import StepTalesTransition from '@/components/tales/step-transition'
 
 export default function TalesPage () {
@@ -7,6 +7,7 @@ export default function TalesPage () {
       <ReturnStepButton />
       <StepTalesTransition />
       <ScrollButton />
+      <RestartTaleButton />
     </main>
   )
 }
