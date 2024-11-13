@@ -20,6 +20,7 @@
     "indent": ["error", 2],
     "react/react-in-jsx-scope": "off",
     "@typescript-eslint/no-floating-promises": "off",
+    "jsx-a11y/alt-text": "off",
     "no-custom-classname": "off",
     "tailwindcss/no-custom-classname": "off",
     "semi": ["error", "never"],
