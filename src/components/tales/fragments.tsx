@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { CircleStop, SendHorizonal, Star, Volume2 } from 'lucide-react'
 import { useState } from 'react'
 
+import GenerateFragmentImage from '@/components/tales/image'
 import { type FragmentTypeWithSelection } from '@/types'
 import { cn } from '@/utils/cn'
 
@@ -72,7 +73,7 @@ export function StoryFragment ({
   }
 
   return (
-    <li className='fragment-item group mb-6 ms-6 lg:ms-12'>
+    <li className='fragment-item mb-6 ms-6 lg:ms-12'>
       <span className='absolute -start-3 flex size-6 items-center justify-center rounded-full bg-yellow-300 text-gray-500 ring-8 ring-gray-100 dark:bg-yellow-700 dark:ring-gray-900'>
         <Star size={24} />
       </span>
@@ -80,7 +81,7 @@ export function StoryFragment ({
         {message}
       </p>
 
-      <div className='my-3 flex flex-wrap items-center justify-start gap-2 opacity-100 transition-opacity duration-150 group-hover:opacity-100 md:opacity-0'>
+      <div className='my-3 flex flex-wrap items-center justify-start gap-2'>
         <Tooltip
           placement='bottom-start'
           content={isPlaying ? 'Detener reproducción' : 'Reproducir historia'}
@@ -95,6 +96,7 @@ export function StoryFragment ({
             {isPlaying && <CircleStop size={20} />}
           </Button>
         </Tooltip>
+        <GenerateFragmentImage fragment={fragment} />
       </div>
 
       <div className='mt-4 flex flex-wrap gap-2 pb-4'>
