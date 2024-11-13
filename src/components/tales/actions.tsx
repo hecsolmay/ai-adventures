@@ -237,7 +237,7 @@ export function ErrorMessage ({ onRetry }: ErrorMessageProps) {
 }
 
 export function RestartTaleButton () {
-  const { restartTales } = useTalesFragments()
+  const { restartTales, changePrevCharacterPublicId, setCharacterPublicId } = useTalesFragments()
   const { isOpen, onOpen, onOpenChange } = useDisclosure()
   const { currentStep, setCurrentStep, setGenre } = useStepsTales()
   const handleClick = () => {
@@ -252,6 +252,8 @@ export function RestartTaleButton () {
     restartTales()
     onClose()
     setGenre(null)
+    changePrevCharacterPublicId(null)
+    setCharacterPublicId(null)
   }
 
   if (currentStep === 0) return null
