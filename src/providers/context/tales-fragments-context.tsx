@@ -14,11 +14,7 @@ const TalesFragmentsContext = createContext<TalesFragmentsContextType>({
   prevGenre: null,
   changePrevGenre: (_genre: string | null) => {},
   isError: false,
-  setIsError: () => {},
-  characterPublicId: null,
-  setCharacterPublicId: () => {},
-  prevCharacterPublicId: null,
-  changePrevCharacterPublicId: (_characterPublicId: string | null) => {}
+  setIsError: () => {}
 })
 
 export function useTalesFragmentsContext () {
@@ -35,17 +31,9 @@ export function TalesFragmentsProvider ({
   const [isLoadingFragment, setIsLoadingFragment] = useState(false)
   const prevGenre = useRef<string | null>(null)
   const [isError, setIsError] = useState(false)
-  const [characterPublicId, setCharacterPublicId] = useState<string | null>(
-    null
-  )
-  const prevCharacterPublicId = useRef<string | null>(null)
 
   const changePrevGenre = (genre: string | null) => {
     prevGenre.current = genre
-  }
-
-  const changePrevCharacterPublicId = (characterPublicId: string | null) => {
-    prevCharacterPublicId.current = characterPublicId
   }
 
   return (
@@ -60,11 +48,7 @@ export function TalesFragmentsProvider ({
         prevGenre: prevGenre.current,
         changePrevGenre,
         isError,
-        setIsError,
-        characterPublicId,
-        setCharacterPublicId,
-        prevCharacterPublicId: prevCharacterPublicId.current,
-        changePrevCharacterPublicId
+        setIsError
       }}
     >
       {children}

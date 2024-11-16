@@ -21,10 +21,6 @@ export interface TalesFragmentsContextType {
   changePrevGenre: (genre: string | null) => void
   isError: boolean
   setIsError: Dispatch<SetStateAction<boolean>>
-  characterPublicId: string | null
-  setCharacterPublicId: Dispatch<SetStateAction<string | null>>
-  prevCharacterPublicId: string | null
-  changePrevCharacterPublicId: (characterPublicId: string | null) => void
 }
 
 export interface SettingsContextType {

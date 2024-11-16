@@ -5,7 +5,6 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { CircleStop, SendHorizonal, Star, Volume2 } from 'lucide-react'
 import { useState } from 'react'
 
-import GenerateFragmentImage from '@/components/tales/image'
 import { type FragmentTypeWithSelection } from '@/types'
 import { cn } from '@/utils/cn'
 
@@ -96,7 +95,6 @@ export function StoryFragment ({
             {isPlaying && <CircleStop size={20} />}
           </Button>
         </Tooltip>
-        <GenerateFragmentImage fragment={fragment} />
       </div>
 
       <div className='mt-4 flex flex-wrap gap-2 pb-4'>

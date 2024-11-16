@@ -17,11 +17,7 @@ export default function useTalesFragments () {
     prevGenre,
     changePrevGenre,
     isError,
-    setIsError,
-    characterPublicId,
-    setCharacterPublicId,
-    prevCharacterPublicId,
-    changePrevCharacterPublicId
+    setIsError
   } = useTalesFragmentsContext()
 
   const { selectedVoiceIndex } = useSettings()
@@ -52,13 +48,11 @@ export default function useTalesFragments () {
     setMessages([])
     changePrevGenre(null)
     setIsError(false)
-    changePrevCharacterPublicId(null)
   }
 
   const startTale = async (genre: string | null) => {
     const isPrevGenre = genre === prevGenre
-    const isPrevCharacter = characterPublicId === prevCharacterPublicId
-    if ((isPrevGenre && isPrevCharacter) || genre === null) return
+    if (isPrevGenre || genre === null) return
     restartTales()
     setIsLoadingFragment(true)
     try {
@@ -180,10 +174,6 @@ export default function useTalesFragments () {
     prevGenre,
     playSpeechTale,
     stopSpeechTale,
-    isError,
-    characterPublicId,
-    setCharacterPublicId,
-    prevCharacterPublicId,
-    changePrevCharacterPublicId
+    isError
   }
 }
