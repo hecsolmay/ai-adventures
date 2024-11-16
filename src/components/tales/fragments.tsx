@@ -7,6 +7,10 @@ import { useState } from 'react'
 
 import { type FragmentTypeWithSelection } from '@/types'
 import { cn } from '@/utils/cn'
+import { ShowGenerateImageButton } from '@/components/tales/actions'
+import GenerateImage from '@/components/tales/generate-image'
+
+import AnimatedAccordion from '../animations/animate-accordion'
 
 interface StoryFragmentProps {
   fragment: FragmentTypeWithSelection
@@ -26,6 +30,7 @@ export function StoryFragment ({
   const { message, choiceSelectedIndex, choices } = fragment
   const [hideForm, setHideForm] = useState(false)
   const [value, setValue] = useState('')
+  const [isAccordionOpen, setIsAccordionOpen] = useState(true)
 
   const getIsChoiceSelected = (choice: string) => {
     const originalIndex = choices.indexOf(choice)
@@ -95,6 +100,20 @@ export function StoryFragment ({
             {isPlaying && <CircleStop size={20} />}
           </Button>
         </Tooltip>
+        <ShowGenerateImageButton
+          onClick={() => {
+            setIsAccordionOpen(!isAccordionOpen)
+          }}
+          showImage={isAccordionOpen}
+        />
+      </div>
+
+      <div className='mt-4'>
+        <AnimatedAccordion show={isAccordionOpen}>
+          <GenerateImage
+            backgroundDescription={fragment.backgroundDescription}
+          />
+        </AnimatedAccordion>
       </div>
 
       <div className='mt-4 flex flex-wrap gap-2 pb-4'>

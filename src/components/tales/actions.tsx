@@ -16,6 +16,8 @@ import {
   BookOpenText,
   Bot,
   ChevronRight,
+  Image,
+  ImageOff,
   RefreshCw,
   RotateCw,
   Undo2
@@ -300,5 +302,34 @@ export function RestartTaleButton () {
         </ModalContent>
       </Modal>
     </>
+  )
+}
+
+interface ShowGenerateImageButtonProps {
+  onClick?: () => void
+  showImage?: boolean
+}
+
+export function ShowGenerateImageButton ({
+  onClick,
+  showImage = true
+}: ShowGenerateImageButtonProps) {
+  const content = showImage ? 'Ocultar imagen generada' : 'Mostrar imagen generada'
+
+  return (
+    <Tooltip
+      showArrow
+      content={content}
+      placement='bottom-start'
+    >
+      <Button
+        className='text-slate-700'
+        variant='light'
+        onClick={onClick}
+        isIconOnly
+      >
+        {showImage ? <ImageOff size={20} /> : <Image size={20} />}
+      </Button>
+    </Tooltip>
   )
 }
