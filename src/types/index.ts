@@ -16,4 +16,5 @@ export type Provider = 'openai' | 'groq'
 export type LucideIconType = LucideIcon
 export interface SettingsType {
   selectedVoiceIndex: number
+  openAiApiKey: string | null
 }

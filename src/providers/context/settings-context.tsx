@@ -6,6 +6,7 @@ import { getSettingsFromLocalStorage } from '@/utils/localStorage'
 
 const SettingsContext = createContext<SettingsContextType>({
   setSelectedVoiceIndex: () => {},
+  setOpenAiApiKey: () => {},
   ...DEFAULT_SETTINGS_VALUES
 })
 
@@ -15,6 +16,7 @@ export function useSettingsContext () {
 
 export function SettingsProvider ({ children }: { children: React.ReactNode }) {
   const [selectedVoiceIndex, setSelectedVoiceIndex] = useState(0)
+  const [openAiApiKey, setOpenAiApiKey] = useState<string | null>(null)
 
   useEffect(() => {
     const settings = getSettingsFromLocalStorage()
@@ -25,7 +27,9 @@ export function SettingsProvider ({ children }: { children: React.ReactNode }) {
     <SettingsContext.Provider
       value={{
         selectedVoiceIndex,
-        setSelectedVoiceIndex
+        setSelectedVoiceIndex,
+        openAiApiKey,
+        setOpenAiApiKey
       }}
     >
       {children}

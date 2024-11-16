@@ -2,6 +2,7 @@
 
 import {
   Button,
+  Input,
   Modal,
   ModalBody,
   ModalContent,
@@ -24,7 +25,9 @@ export default function SettingsButton () {
     selectedVoiceIndex,
     setSelectedVoiceIndex,
     handleRestoreSettings,
-    handleSaveSettings
+    handleSaveSettings,
+    openAiApiKey,
+    setOpenAiApiKey
   } = useSettings()
   const [isOpenSelect, setIsOpenSelect] = useState(false)
   const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([])
@@ -136,6 +139,17 @@ export default function SettingsButton () {
                     Escuchar
                   </Button>
                 </div>
+
+                <Input
+                  type='text'
+                  label='OpenAI API Key'
+                  value={openAiApiKey ?? ''}
+                  onChange={event => {
+                    setOpenAiApiKey(event.target.value)
+                  }}
+                  description='No guardaremos tu clave, solo la utilizaremos para generar imágenes, y solo tu tendrás acceso a ellas.'
+                  className='w-full'
+                />
               </ModalBody>
               <ModalFooter>
                 <Button

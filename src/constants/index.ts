@@ -13,5 +13,6 @@ export const LOCAL_STORAGE_KEYS = {
 export const DEFAULT_VOICE_INDEX = 0
 
 export const DEFAULT_SETTINGS_VALUES: SettingsType = {
-  selectedVoiceIndex: DEFAULT_VOICE_INDEX
+  selectedVoiceIndex: DEFAULT_VOICE_INDEX,
+  openAiApiKey: null
 }

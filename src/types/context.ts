@@ -30,4 +30,6 @@ export interface TalesFragmentsContextType {
 export interface SettingsContextType {
   selectedVoiceIndex: number
   setSelectedVoiceIndex: Dispatch<SetStateAction<number>>
+  openAiApiKey: string | null
+  setOpenAiApiKey: Dispatch<SetStateAction<string | null>>
 }

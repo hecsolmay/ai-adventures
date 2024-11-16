@@ -14,6 +14,7 @@ export function getSettingsFromLocalStorage (): SettingsType {
   const { voiceIndex: selectedVoiceIndex } = result.data
 
   return {
-    selectedVoiceIndex
+    selectedVoiceIndex,
+    openAiApiKey: null
   }
 }

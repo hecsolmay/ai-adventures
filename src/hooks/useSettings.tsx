@@ -5,14 +5,21 @@ import { type SettingsType } from '@/types'
 import { LOCAL_STORAGE_KEYS } from '@/constants'
 
 export function useSettings () {
-  const { selectedVoiceIndex, setSelectedVoiceIndex } = useSettingsContext()
+  const {
+    selectedVoiceIndex,
+    setSelectedVoiceIndex,
+    openAiApiKey,
+    setOpenAiApiKey
+  } = useSettingsContext()
   const prevSettings = useRef<SettingsType>({
-    selectedVoiceIndex
+    selectedVoiceIndex,
+    openAiApiKey
   })
 
   const handleSaveSettings = () => {
     prevSettings.current = {
-      selectedVoiceIndex
+      selectedVoiceIndex,
+      openAiApiKey
     }
     localStorage.setItem(
       LOCAL_STORAGE_KEYS.VOICE_INDEX,
@@ -22,6 +29,7 @@ export function useSettings () {
 
   const handleRestoreSettings = () => {
     setSelectedVoiceIndex(prevSettings.current.selectedVoiceIndex)
+    setOpenAiApiKey(prevSettings.current.openAiApiKey)
   }
 
   return {
@@ -29,6 +37,8 @@ export function useSettings () {
     setSelectedVoiceIndex,
     prevSettings,
     handleSaveSettings,
-    handleRestoreSettings
+    handleRestoreSettings,
+    openAiApiKey,
+    setOpenAiApiKey
   }
 }
