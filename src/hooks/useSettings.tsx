@@ -16,7 +16,9 @@ export function useSettings () {
     openAiApiKey
   })
 
-  const handleSaveSettings = () => {
+  const handleSaveSettings = (openAiApiKey: string | null) => {
+    setOpenAiApiKey(openAiApiKey)
+
     prevSettings.current = {
       selectedVoiceIndex,
       openAiApiKey

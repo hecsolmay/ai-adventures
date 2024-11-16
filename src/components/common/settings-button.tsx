@@ -26,10 +26,10 @@ export default function SettingsButton () {
     setSelectedVoiceIndex,
     handleRestoreSettings,
     handleSaveSettings,
-    openAiApiKey,
-    setOpenAiApiKey
+    openAiApiKey
   } = useSettings()
   const [isOpenSelect, setIsOpenSelect] = useState(false)
+  const [inputValue, setInputValue] = useState(openAiApiKey ?? '')
   const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([])
   const [isClient, setIsClient] = useState(false)
 
@@ -143,11 +143,13 @@ export default function SettingsButton () {
                 <Input
                   type='text'
                   label='OpenAI API Key'
-                  value={openAiApiKey ?? ''}
+                  value={inputValue}
                   isClearable
-                  onClear={() => { setOpenAiApiKey(null) }}
+                  onClear={() => {
+                    setInputValue('')
+                  }}
                   onChange={event => {
-                    setOpenAiApiKey(event.target.value)
+                    setInputValue(event.target.value)
                   }}
                   description='No guardaremos tu clave, solo la utilizaremos para generar imágenes, y solo tu tendrás acceso a ellas.'
                   className='w-full'
@@ -158,6 +160,7 @@ export default function SettingsButton () {
                   color='danger'
                   variant='light'
                   onPress={() => {
+                    setInputValue(openAiApiKey ?? '')
                     onClose()
                   }}
                 >
@@ -166,7 +169,7 @@ export default function SettingsButton () {
                 <Button
                   color='warning'
                   onPress={() => {
-                    handleSaveSettings()
+                    handleSaveSettings(inputValue)
                     onClose()
                   }}
                 >
