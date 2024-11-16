@@ -144,6 +144,8 @@ export default function SettingsButton () {
                   type='text'
                   label='OpenAI API Key'
                   value={openAiApiKey ?? ''}
+                  isClearable
+                  onClear={() => { setOpenAiApiKey(null) }}
                   onChange={event => {
                     setOpenAiApiKey(event.target.value)
                   }}
