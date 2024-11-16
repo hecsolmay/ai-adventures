@@ -54,7 +54,6 @@ export default function GenerateImage ({
           openAiApiKey
         )
 
-        console.log('Response: ', response)
         const { imageUrl } = response
 
         if (imageUrl === null) {
