@@ -7,3 +7,9 @@ cloudinary.config({
 })
 
 export default cloudinary
+
+export async function uploadImageFromUrl (imageUrl: string) {
+  const response = await cloudinary.uploader.upload(imageUrl)
+
+  return response.secure_url
+}

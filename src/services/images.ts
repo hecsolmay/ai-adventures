@@ -1,4 +1,6 @@
 import { generateImageSchema } from '@/schemas/images'
+import { uploadImageFromUrl } from '@/utils/cloudinary'
+import { generateDalle3Image } from '@/utils/openai'
 
 const MOCK_IMAGES = [
   'https://res.cloudinary.com/dd5xvjvgk/image/upload/f_auto,q_auto/kdd5ewyvp1cfys3raw0w',
@@ -9,7 +11,7 @@ const MOCK_IMAGES = [
 const delay = async (ms: number) =>
   await new Promise(resolve => setTimeout(resolve, ms))
 
-export async function generateImage (data: any) {
+export async function generateImage (data: any, isMock = true) {
   const {
     success,
     data: resultData,
@@ -22,13 +24,33 @@ export async function generateImage (data: any) {
 
   const { backgroundDescription, apiKey } = resultData
 
-  const imageUrl = await getDalle3Image(backgroundDescription, apiKey)
+  let imageUrl: string | null = null
+
+  if (isMock) {
+    imageUrl = await getRandomImageOrNull()
+  } else {
+    imageUrl = await getDalle3Image(backgroundDescription, apiKey)
+  }
 
   return { success: true, imageUrl }
 }
 
 async function getDalle3Image (backgroundDescription: string, apiKey: string) {
-  const image = await getRandomImageOrNull()
+  let image: string | null = null
+
+  try {
+    const prompt = `${backgroundDescription} Make it Storybook style, whimsical, soft colors, magical atmosphere`
+    image = await generateDalle3Image(apiKey, prompt)
+
+    if (image === null) {
+      return null
+    }
+
+    const cloudinaryUrl = await uploadImageFromUrl(image)
+    image = cloudinaryUrl
+  } catch (error) {
+    console.error(error)
+  }
 
   return image
 }
