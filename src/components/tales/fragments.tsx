@@ -9,6 +9,7 @@ import { type FragmentTypeWithSelection } from '@/types'
 import { cn } from '@/utils/cn'
 import { ShowGenerateImageButton } from '@/components/tales/actions'
 import GenerateImage from '@/components/tales/generate-image'
+import { cleanSpanishText } from '@/utils/text'
 
 import AnimatedAccordion from '../animations/animate-accordion'
 
@@ -82,7 +83,7 @@ export function StoryFragment ({
         <Star size={24} />
       </span>
       <p className='prose font-cinzel font-medium dark:prose-invert md:max-w-[95ch]'>
-        {message}
+        {cleanSpanishText(message)}
       </p>
 
       <div className='my-3 flex flex-wrap items-center justify-start gap-2'>
