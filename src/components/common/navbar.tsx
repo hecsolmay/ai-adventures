@@ -65,9 +65,9 @@ export default function Navbar () {
           <SettingsButton />
         </NavbarItem>
 
-        <NavbarItem className='hidden sm:flex'>
+        {/* <NavbarItem className='hidden sm:flex'>
           <NextUILink href='#'>Iniciar Sesión</NextUILink>
-        </NavbarItem>
+        </NavbarItem> */}
       </NavbarContent>
       <NavbarMenu className='bg-white/80 backdrop-blur-sm'>
         {navbarLinks.map(({ name, href }) => {
