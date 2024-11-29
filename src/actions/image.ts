@@ -3,6 +3,6 @@
 import { generateImage } from '@/services/images'
 
 export async function generateTaleImage (prompt: string, apiKey: string) {
-  const result = await generateImage({ backgroundDescription: prompt, apiKey })
+  const result = await generateImage({ backgroundDescription: prompt, apiKey }, false)
   return result
 }
