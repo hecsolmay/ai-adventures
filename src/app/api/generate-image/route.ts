@@ -3,7 +3,7 @@ import { generateImage } from '@/services/images'
 export async function POST (request: Request) {
   try {
     const body = await request.json()
-    const result = await generateImage(body)
+    const result = await generateImage(body, false)
 
     if (result.error !== undefined) {
       return Response.json(result)

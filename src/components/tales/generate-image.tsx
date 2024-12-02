@@ -14,7 +14,7 @@ import {
 } from 'lucide-react'
 import { Button } from '@nextui-org/react'
 
-import { generateTaleImage } from '@/actions/image'
+import { generateTaleImage } from '@/utils/image'
 import { useSettings } from '@/hooks/useSettings'
 import { type DivProps } from '@/types/props'
 import { cn } from '@/utils/cn'
