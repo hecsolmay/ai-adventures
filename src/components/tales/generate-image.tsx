@@ -1,7 +1,7 @@
 'use client'
 
+import { Button } from '@nextui-org/react'
 import { motion } from 'framer-motion'
-import { useEffect, useState } from 'react'
 import {
   AlertCircle,
   AlertOctagon,
@@ -12,9 +12,9 @@ import {
   RefreshCw,
   Settings
 } from 'lucide-react'
-import { Button } from '@nextui-org/react'
+import { useEffect, useState } from 'react'
 
-import { generateTaleImage } from '@/utils/image'
+// import { generateTaleImage } from '@/utils/image'
 import { useSettings } from '@/hooks/useSettings'
 import { type DivProps } from '@/types/props'
 import { cn } from '@/utils/cn'
@@ -24,6 +24,12 @@ const MAX_RETRY_COUNT = 3
 interface GenerateImageProps {
   backgroundDescription: string
   onImageGenerated?: (imageUrl: string) => void
+}
+
+const randomDelay = async () => {
+  // random delay between 4000 and 6000 milliseconds
+  const delay = Math.random() * 4000 + 4000
+  return await new Promise(resolve => setTimeout(resolve, delay))
 }
 
 export default function GenerateImage ({
@@ -49,18 +55,21 @@ export default function GenerateImage ({
       setIsError(false)
 
       try {
-        const response = await generateTaleImage(
-          backgroundDescription,
-          openAiApiKey
-        )
+        // const response = await generateTaleImage(
+        //   backgroundDescription,
+        //   openAiApiKey
+        // )
 
-        const { imageUrl } = response
+        // const { imageUrl } = response
 
-        if (imageUrl === null) {
-          setIsError(true)
-          return
-        }
+        // if (imageUrl === null) {
+        //   setIsError(true)
+        //   return
+        // }
 
+        await randomDelay()
+
+        const imageUrl = backgroundDescription
         setImageSrc(imageUrl)
         onImageGenerated?.(imageUrl)
       } catch (error) {
@@ -103,7 +112,7 @@ export default function GenerateImage ({
     <GenerateImageContainer>
       <img
         src={imageSrc}
-        className='h-96 w-full rounded-md object-cover'
+        className='h-96 w-full max-w-96 rounded-md object-cover'
         alt='Imagen generada del párrafo'
       />
     </GenerateImageContainer>
@@ -113,7 +122,7 @@ export default function GenerateImage ({
 function GenerateImageContainer ({ children, className, ...props }: DivProps) {
   return (
     <div
-      className={cn('container mx-auto aspect-video h-96 w-full', className)}
+      className={cn('container mx-auto flex justify-center aspect-video h-96 w-full', className)}
       {...props}
     >
       {children}

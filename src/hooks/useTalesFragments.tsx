@@ -2,7 +2,12 @@
 
 import { useEffect } from 'react'
 
-import { beginTaleStory, continueTaleStory } from '@/actions/tales'
+import {
+  // beginTaleStory,
+  beginTaleStoryMock,
+  // continueTaleStory,
+  continueTaleStoryMock
+} from '@/actions/tales'
 import { useSettings } from '@/hooks/useSettings'
 import { useTalesFragmentsContext } from '@/providers/context/tales-fragments-context'
 
@@ -56,13 +61,13 @@ export default function useTalesFragments () {
     restartTales()
     setIsLoadingFragment(true)
     try {
-      const response = await beginTaleStory(genre)
+      const response = await beginTaleStoryMock(genre)
       changePrevGenre(genre)
-      const { messages, ...rawFragment } = response
+      const rawFragment = response
       setFragments([
         { ...rawFragment, choiceSelectedIndex: null, isPlaying: false }
       ])
-      setMessages(messages)
+      // setMessages(messages)
     } catch (error) {
       console.error(error)
       setIsError(true)
@@ -75,17 +80,14 @@ export default function useTalesFragments () {
     setIsLoadingFragment(true)
     setIsError(false)
     try {
-      const response = await continueTaleStory({
-        messages,
-        choice
-      })
+      const response = await continueTaleStoryMock(fragments.length)
 
-      const { messages: responseMessages, ...rawFragment } = response
+      const rawFragment = response
       setFragments(prev => [
         ...prev,
         { ...rawFragment, choiceSelectedIndex: null, isPlaying: false }
       ])
-      setMessages(responseMessages)
+      // setMessages(responseMessages)
     } catch (error) {
       console.error(error)
       setIsError(true)

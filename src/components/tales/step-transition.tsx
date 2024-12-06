@@ -5,9 +5,10 @@ import { AnimatePresence, motion } from 'framer-motion'
 import Introduction from '@/components/tales/introduction'
 import SelectCategory from '@/components/tales/select-category'
 import TalesCreation from '@/components/tales/tales-creation'
+import WriteStart from '@/components/tales/write-start'
 import useStepsTales from '@/hooks/useStepsTales'
 
-const steps = [Introduction, SelectCategory, TalesCreation]
+const steps = [Introduction, SelectCategory, WriteStart, TalesCreation]
 
 export const MAX_STEPS = steps.length - 1 // The last step is the final step
 
